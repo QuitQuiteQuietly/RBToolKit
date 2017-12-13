@@ -1,6 +1,5 @@
 # RBToolKit
 
-[![CI Status](http://img.shields.io/travis/wzc5670594/RBToolKit.svg?style=flat)](https://travis-ci.org/wzc5670594/RBToolKit)
 [![Version](https://img.shields.io/cocoapods/v/RBToolKit.svg?style=flat)](http://cocoapods.org/pods/RBToolKit)
 [![License](https://img.shields.io/cocoapods/l/RBToolKit.svg?style=flat)](http://cocoapods.org/pods/RBToolKit)
 [![Platform](https://img.shields.io/cocoapods/p/RBToolKit.svg?style=flat)](http://cocoapods.org/pods/RBToolKit)
@@ -22,7 +21,7 @@ pod 'RBToolKit'
 
 ## Author
 
-wzc5670594, 18511234520@163.com
+Ray, ray_wzc@163.com
 
 ## License
 
