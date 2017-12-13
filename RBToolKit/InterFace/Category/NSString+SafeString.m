@@ -15,40 +15,26 @@
     };
 }
 
-//- (NSString *(^)())safe {
-//    return ^() {
-//        
-//        if (!self) {
-//            return @"";
-//        }
-//        
-//        if (self.length) {
-//            if ([self isEqualToString:@"null"] || [self isEqualToString:@"<null>"]) {
-//                return @"";
-//            }
-//            return self;
-//        }
-//        return @"";
-//    };
-//}
-
-+ (NSString *(^)(id))safeString {
++ (NSString *(^)(id))safe {
     return ^(id value) {
         
         if (!value || ![value isKindOfClass:[NSString class]]) {
+            
+            if ([value isKindOfClass:NSNumber.class]) {
+                return [self outputSafeString:[(NSNumber *)value stringValue]];
+            }
+            
             return @"";
         }
-        
-        NSString *x = value;
-        
-        if (x.length) {
-            if ([x isEqualToString:@"null"] || [x isEqualToString:@"<null>"]) {
-                return @"";
-            }
-            return x;
-        }
-        return @"";
+        return [self outputSafeString:(NSString *)value];
     };
+}
+
++ (NSString *)outputSafeString:(NSString *)value {
+    if (value == NULL) {
+        return @"";
+    }
+    return value.length ? value : @"";
 }
 
 @end

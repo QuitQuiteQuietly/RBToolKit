@@ -18,7 +18,7 @@
  
  @return 今天/明天  14:34
  */
-+ (NSString *(^)(NSNumber *milliSecond))time;
++ (NSString *(^)(double milliSecond))time;
 
 /**
  今天/明天  14:34
@@ -27,7 +27,7 @@
  
  @return 今天/明天  14:34
  */
-+ (NSString *(^)(NSNumber *second))time_second;
++ (NSString *(^)(double second))time_second;
 
 
 

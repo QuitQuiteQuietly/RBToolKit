@@ -13,33 +13,32 @@
 
 @implementation KXTime
 
-+ (NSString *(^)(NSNumber *))time {
-    return ^(NSNumber *ms) {
++ (NSString *(^)(double))time {
+    return ^(double ms) {
       
         if (!ms) {
             return @"";
         }
         
-        return NSString.safeString([KXTime getDateConvertToLocalTime:ms.secondsValue.boolValue]);
-        
+        return KXTime.time_second(@(ms).secondsValue.doubleValue);
     };
 }
 
-+ (NSString *(^)(NSNumber *))time_second {
-    return ^(NSNumber *ms) {
++ (NSString *(^)(double))time_second {
+    return ^(double s) {
         
-        if (!ms) {
+        if (!s) {
             return @"";
         }
         
-        return NSString.safeString([KXTime getDateConvertToLocalTime:ms.doubleValue]);
+        return NSString.safe([KXTime getDateConvertToLocalTime:s]);
         
     };
 }
 
 + (NSString *)getDateConvertToLocalTime:(double)time {
     
-    if (time < 0.0) {
+    if (time <= 0.0) {
         return @"";
     }
     

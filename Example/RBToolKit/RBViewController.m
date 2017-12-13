@@ -8,6 +8,10 @@
 
 #import "RBViewController.h"
 
+
+#import <RBToolKit/RBToolKit.h>
+
+
 @interface RBViewController ()
 
 @end
@@ -17,6 +21,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSNumber *k = nil;
+    
+    if (k == NULL) {
+        NSLog(@"13");
+    }
+    
+    NSString *x = @"<null>";
+
+    if (x == NULL) {
+        NSLog(@"13");
+    }
+    
+    NSLog(@"33%@----%@", NSString.safe(k), NSString.safe(x));
+    
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RB_InterFace : NSObject
+@interface RBInterFace : NSObject
 
 
 /**

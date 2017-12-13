@@ -9,12 +9,9 @@
 
 @interface NSString (SafeString)
 
-///是否有空字符或nil
-//- (NSString *(^)())safe;
 
 ///是否有空字符或nil
-+ (NSString *(^)(id value))safeString;
-
++ (NSString *(^)(id value))safe;
 
 /**
  替换字符串
