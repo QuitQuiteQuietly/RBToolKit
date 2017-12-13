@@ -1,0 +1,19 @@
+PODS:
+  - Kiwi (2.4.0)
+  - RBToolKit (0.1.0)
+
+DEPENDENCIES:
+  - Kiwi
+  - RBToolKit (from `../`)
+
+EXTERNAL SOURCES:
+  RBToolKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  RBToolKit: b56900d88aa4ce4d4f5173900483228fc7eefcd2
+
+PODFILE CHECKSUM: e3337a2c6a67f1bfc40f1593dc0defff28c8d2e2
+
+COCOAPODS: 1.3.1
