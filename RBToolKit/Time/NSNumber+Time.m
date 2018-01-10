@@ -14,14 +14,14 @@
 
 - (NSString *)transToPastTime {
 
-    return [KXTime getDateConvertToLocalTime:self.doubleValue];
+    return [RBTime getDateConvertToLocalTime:self.doubleValue];
 
 }
 
 
 - (NSString *(^)(NSString *))transToPastTimeWithFormat {
     return ^(NSString *format) {
-        return [KXTime getDateWithFormat:format withPastSeconds:self.doubleValue];
+        return [RBTime getDateWithFormat:format withPastSeconds:self.doubleValue];
     };
 }
 

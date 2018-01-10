@@ -11,7 +11,7 @@
 #import "NSString+SafeString.h"
 #import "NSNumber+Time.h"
 
-@implementation KXTime
+@implementation RBTime
 
 + (NSString *(^)(double))time {
     return ^(double ms) {
@@ -20,7 +20,7 @@
             return @"";
         }
         
-        return KXTime.time_second(@(ms).secondsValue.doubleValue);
+        return RBTime.time_second(@(ms).secondsValue.doubleValue);
     };
 }
 
@@ -31,7 +31,7 @@
             return @"";
         }
         
-        return NSString.safe([KXTime getDateConvertToLocalTime:s]);
+        return NSString.safe([RBTime getDateConvertToLocalTime:s]);
         
     };
 }

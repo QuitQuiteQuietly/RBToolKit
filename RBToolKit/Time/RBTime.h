@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KXTime : NSObject
+@interface RBTime : NSObject
 
 
 /**
