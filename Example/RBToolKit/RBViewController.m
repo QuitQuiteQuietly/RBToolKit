@@ -11,7 +11,7 @@
 
 #import <RBToolKit/RBToolKit.h>
 
-
+#import <RBToolKit/RBLocalize.h>
 @interface RBViewController ()
 
 @end
@@ -25,8 +25,10 @@
     NSNumber *k = nil;
     
     if (k == NULL) {
-        NSLog(@"13");
+        NSLog(@"1f3");
     }
+    
+    NSLog(@"当前语言 %lu", (unsigned long)[RBLocalize checkLocalizeStatus]);
     
     NSString *x = @"<null>";
 

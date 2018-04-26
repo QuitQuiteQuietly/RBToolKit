@@ -16,9 +16,21 @@ TODO: Add long description of the pod here.
                         }
     #:submodules => true
 
-  s.subspec 'InterFace' do |inter|
-    inter.source_files = 'RBToolKit/InterFace/*.{h,m}', 'RBToolKit/InterFace/**/*.{h,m}'
-  end
+
+
+    s.subspec 'InterFace' do |inter|
+        inter.source_files = 'RBToolKit/InterFace/**/*.{h,m}'
+    end
+
+    s.subspec 'Time' do |time|
+        time.source_files = 'RBToolKit/Time/*.{h,m}', 'RBToolKit/Time/**/*.{h,m}'
+    end
+
+    s.subspec 'CountDown' do |cd|
+        cd.source_files = 'RBToolKit/CountDown/*.{h,m}'
+        cd.dependency 'ReactiveObjC'
+    end
+
 
   s.ios.deployment_target = '8.0'
 
