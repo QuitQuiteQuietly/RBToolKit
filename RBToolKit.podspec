@@ -34,6 +34,8 @@ TODO: Add long description of the pod here.
     local.source_files = 'RBToolKit/Localize/*.{h,m}'
     end
 
+/Users/Ray/Library/Developer/CoreSimulator/Devices/CD106ABC-465A-4E19-99EA-586018F2F633/data/Containers/Bundle/Application/931C018D-C563-466F-98CD-445B684FF236/ZLExchange.app/zh-Hans.lproj
+
 
   s.ios.deployment_target = '8.0'
 
