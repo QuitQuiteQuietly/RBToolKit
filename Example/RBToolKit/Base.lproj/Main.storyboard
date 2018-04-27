@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -52,10 +53,34 @@
                                     <segue destination="V3z-CL-UcA" kind="show" id="i9g-4s-5CY"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEH-ua-Ifm" customClass="RBLines">
+                                <rect key="frame" x="167.5" y="149" width="40" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="nAf-4t-i5S"/>
+                                    <constraint firstAttribute="height" constant="40" id="nz4-mN-4OQ"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FiG-2a-qvv">
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FiG-2a-qvv" secondAttribute="height" multiplier="1:1" id="fea-xj-ZM7"/>
+                                    <constraint firstAttribute="height" constant="40" id="mFp-Wa-IUn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lEH-ua-Ifm" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="6mz-07-Qjb"/>
+                            <constraint firstItem="FiG-2a-qvv" firstAttribute="centerX" secondItem="TpU-gO-2f1" secondAttribute="centerX" id="T8c-eC-3oP"/>
+                            <constraint firstItem="FiG-2a-qvv" firstAttribute="centerY" secondItem="TpU-gO-2f1" secondAttribute="centerY" id="VtT-xf-L9c"/>
+                            <constraint firstItem="lEH-ua-Ifm" firstAttribute="top" secondItem="uEw-UM-LJ8" secondAttribute="bottom" constant="85" id="p0w-WD-DFz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="86x-6J-flD"/>
+                    <connections>
+                        <outlet property="imageView" destination="FiG-2a-qvv" id="fVa-hW-xBr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

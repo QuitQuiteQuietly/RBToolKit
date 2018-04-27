@@ -14,6 +14,9 @@
 #import <RBToolKit/RBLocalize.h>
 @interface RBViewController ()
 
+/**  */
+@property (nonatomic, weak)IBOutlet UIImageView *imageView;
+
 @end
 
 @implementation RBViewController
@@ -27,6 +30,12 @@
     if (k == NULL) {
         NSLog(@"1f3");
     }
+    
+    
+    
+   UIImage *i = [UIImage animatedImageWithImages:@[[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"3"],[UIImage imageNamed:@"4"]] duration:2];
+    
+    self.imageView.image = i;
     
     NSLog(@"当前语言 %lu", (unsigned long)[RBLocalize checkLocalizeStatus]);
     
