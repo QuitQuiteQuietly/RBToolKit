@@ -19,7 +19,6 @@
 @property (nonatomic, assign)NSInteger maxSeconds;
 
 /**  */
-//@property (nonatomic, assign)eLocalizeLanguage currentLanguage;
 @property (nonatomic, strong)NSString *reSend;
 
 /**  */
@@ -37,6 +36,11 @@
     
     return f;
     
+}
+
+- (void)setCountDown:(NSInteger)countDown {
+    _countDown = countDown;
+    _maxSeconds = _countDown;
 }
 
 - (instancetype)init {
