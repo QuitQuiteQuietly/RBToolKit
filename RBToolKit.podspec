@@ -19,11 +19,17 @@ TODO: Add long description of the pod here.
 
 
     s.subspec 'InterFace' do |inter|
-        inter.source_files = 'RBToolKit/InterFace/**/*.{h,m}'
+        inter.source_files = 'RBToolKit/InterFace/*.{h,m}', 'RBToolKit/InterFace/Category/*.{h,m}'
     end
 
     s.subspec 'Time' do |time|
         time.source_files = 'RBToolKit/Time/*.{h,m}', 'RBToolKit/Time/**/*.{h,m}'
+    end
+
+    s.subspec 'TableView' do |tableView|
+        tableView.source_files = 'RBToolKit/TableView/RBTableView.{h,m}'
+        tableView.dependency 'MJRefresh'
+        tableView.dependency 'ReactiveObjC'
     end
 
     s.subspec 'CountDown' do |cd|
