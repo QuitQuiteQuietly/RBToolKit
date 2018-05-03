@@ -58,11 +58,13 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
  @return 图片
  */
 + (UIImageView *)imageViewWithInformation:(NSString *)information
+                                textColor:(UIColor *)textColor
                                     image:(UIImage *)image
                               imageOffset:(CGFloat)offset;
 
 ///子类复写
-+ (UIImageView *)imageViewThatNoMoreDataWithInformation:(NSString *)information
+- (UIImageView *)imageViewThatNoMoreDataWithInformation:(NSString *)information
+                                              textColor:(UIColor *)textColor
                                                   image:(UIImage *)image
                                             imageOffset:(CGFloat)offset
                                                  bgType:(eTableViewBg)bgType;

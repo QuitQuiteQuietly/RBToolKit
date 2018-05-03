@@ -181,22 +181,22 @@
 
 - (UIImageView *)noMoreDataView {
     if (!_noMoreDataView) {
-        _noMoreDataView = [RBTableView imageViewThatNoMoreDataWithInformation:@"" image:nil imageOffset:0 bgType:eTableViewBgNoData];
+        _noMoreDataView = [self imageViewThatNoMoreDataWithInformation:@"" textColor:[UIColor blackColor] image:nil imageOffset:0 bgType:eTableViewBgNoData];
     }
     return _noMoreDataView;
 }
 - (UIImageView *)networkWrongView {
     if (!_networkWrongView) {
-        _networkWrongView = [RBTableView imageViewThatNoMoreDataWithInformation:@"" image:nil imageOffset:0 bgType:eTableViewBgNetGoesWrong];
+        _networkWrongView = [self imageViewThatNoMoreDataWithInformation:@"" textColor:[UIColor blackColor] image:nil imageOffset:0 bgType:eTableViewBgNetGoesWrong];
     }
     return _networkWrongView;
 }
 
-+ (UIImageView *)imageViewThatNoMoreDataWithInformation:(NSString *)information image:(UIImage *)image imageOffset:(CGFloat)offset bgType:(eTableViewBg)bgType {
-    return [self imageViewWithInformation:information image:image imageOffset:offset];
+- (UIImageView *)imageViewThatNoMoreDataWithInformation:(NSString *)information textColor:(UIColor *)textColor image:(UIImage *)image imageOffset:(CGFloat)offset bgType:(eTableViewBg)bgType {
+    return [RBTableView imageViewWithInformation:information textColor:textColor image:image imageOffset:offset];
 }
 
-+ (UIImageView *)imageViewWithInformation:(NSString *)information image:(UIImage *)image imageOffset:(CGFloat)offset {
++ (UIImageView *)imageViewWithInformation:(NSString *)information textColor:(UIColor *)textColor image:(UIImage *)image imageOffset:(CGFloat)offset {
     NSString * finalMessage = @"";
     if (information.length)
     {
@@ -237,7 +237,7 @@
     
     [finalMessage drawAtPoint : CGPointMake (canvasCenterX - strWidth / 2, imageTopY + image.size.height + 10)
                withAttributes : @{NSFontAttributeName : font,
-                                  NSForegroundColorAttributeName : [UIColor blackColor],
+                                  NSForegroundColorAttributeName : textColor,
                                   }];
     
     UIImage *newImage= UIGraphicsGetImageFromCurrentImageContext ();
