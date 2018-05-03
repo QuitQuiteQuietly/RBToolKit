@@ -44,11 +44,6 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
 ///首次请求--会将isHeader和pageIndex都置为0
 - (void)startRefresh;
 
-///refreshHeader是否可用 default : YES
-@property (nonatomic, readwrite, assign)BOOL refreshHeaderEnable;
-///refreshFooter是否可用 default : YES
-@property (nonatomic, readwrite, assign)BOOL refreshFooterEnable;
-
 ///当前的页数
 @property (nonatomic, readonly, assign)NSInteger currentPageIndex;
 
@@ -66,7 +61,7 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
                                     image:(UIImage *)image
                               imageOffset:(CGFloat)offset;
 
-
+///子类复写
 + (UIImageView *)imageViewThatNoMoreDataWithInformation:(NSString *)information
                                                   image:(UIImage *)image
                                             imageOffset:(CGFloat)offset

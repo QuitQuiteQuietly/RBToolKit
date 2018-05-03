@@ -18,6 +18,11 @@
 @property (nonatomic, readwrite, strong)UIImageView *noMoreDataView;
 @property (nonatomic, readwrite, strong)UIImageView *networkWrongView;
 
+///refreshHeader是否可用 default : YES
+@property (nonatomic, readwrite, assign)BOOL refreshHeaderEnable;
+///refreshFooter是否可用 default : YES
+@property (nonatomic, readwrite, assign)BOOL refreshFooterEnable;
+
 @end
 
 @implementation RBTableView
@@ -191,8 +196,7 @@
     return [self imageViewWithInformation:information image:image imageOffset:offset];
 }
 
-+ (UIImageView *)imageViewWithInformation:(NSString *)information image:(UIImage *)image imageOffset:(CGFloat)offset
-{
++ (UIImageView *)imageViewWithInformation:(NSString *)information image:(UIImage *)image imageOffset:(CGFloat)offset {
     NSString * finalMessage = @"";
     if (information.length)
     {
