@@ -7,11 +7,14 @@
 //
 
 #import "RBViewController.h"
-
+#import "AViewController.h"
 
 #import <RBToolKit/RBToolKit.h>
 
 #import <RBToolKit/RBLocalize.h>
+
+#import <ReactiveObjC/ReactiveObjC.h>
+
 @interface RBViewController ()
 
 /**  */
@@ -48,6 +51,22 @@
     NSLog(@"33%@----%@", NSString.safe(k), NSString.safe(x));
     
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (IBAction)toAVc:(id)sender {
+    AViewController *a = [AViewController new];
+    
+    @weakify(self)
+    a.callBack = ^{
+        @strongify(self)
+        [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    [self presentViewController:a animated:YES completion:^{
+        NSLog(@"%@", self);
+    }];
+    NSLog(@"presentedViewController %@", self.presentedViewController);
+    NSLog(@"presentingViewController %@", self.presentingViewController);
 }
 
 - (void)didReceiveMemoryWarning
