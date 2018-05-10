@@ -12,7 +12,4 @@
 ///绝对路径
 - (NSString *)path;
 
-
-//- (instancetype)initDir:(
-
 @end

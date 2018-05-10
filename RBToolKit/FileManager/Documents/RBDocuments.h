@@ -10,11 +10,11 @@
 
 @interface RBUserDir : RBDir
 
-//- (BOOL)checkUserData;
-
-//- (BOOL)writeUserData:(NSData *)userData;
 ///写用户数据
 - (BOOL (^)(NSData *userData))write;
+
+///读取数据
+- (id)read;
 
 @end
 

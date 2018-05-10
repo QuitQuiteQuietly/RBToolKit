@@ -16,46 +16,11 @@
     return _user;
 }
 
-//- (NSString *)userData {
-//    
-//    NSString *path = self.path;
-//    
-//    return [path stringByAppendingPathComponent:[self user]];
-//    
-//}
-
 + (instancetype)dir {
     RBDocuments *d = [[RBDocuments alloc]initDir:eDirDocuments];
     return d;
 }
 
-//
-/////是否存在 --/Documents/User
-//- (BOOL)checkDocumentUserDir {
-//
-//    NSString *userDir = [self documents_userWithUserData:NO];
-//
-//    NSFileManager *file = [NSFileManager defaultManager];
-//
-//    BOOL exists = [file fileExistsAtPath:userDir];
-//    if (!exists) {
-//        exists = [file createDirectoryAtPath:userDir withIntermediateDirectories:NO attributes:nil error:nil];
-//    }
-//
-//    return exists;
-//}
-//
-/////文件夹
-//- (NSString *)documents_userWithUserData:(BOOL)with {
-//    /// --/Documents
-//    NSString *docmentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-//    /// --/Documents/User
-//    NSString *userDir = [docmentPath stringByAppendingPathComponent:@"User"];
-//    return with ? [userDir stringByAppendingPathComponent:[self userData]] : userDir;
-//}
-//
-
-//#endif
 
 @end
 
@@ -75,6 +40,12 @@
     };
 }
 
+- (id)read {
+
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:[self pathOfUserData]];
+    
+}
+
 - (BOOL)writeUserData:(NSData *)userData {
     
     NSFileManager *file = [NSFileManager defaultManager];
@@ -87,10 +58,11 @@
     
     NSError *error = nil;
     
-    ///操作文件
-    final = [final stringByAppendingPathComponent:[self user]];
+   ///寻找文件
+    final = [self pathOfUserData];
     exists = [file fileExistsAtPath:final];
     
+    ///操作文件
     if (exists) {
         ///文件 已存在 覆盖
         exists = [userData writeToFile:final options:NSDataWritingAtomic error:&error];
@@ -102,6 +74,12 @@
     NSLog(@"%@", error);
     return exists;
 }
+
+- (NSString *)pathOfUserData {
+    return [self.path stringByAppendingPathComponent:[self user]];
+}
+
+///校验文件夹是否存在 --/Documents/User
 - (BOOL)checkUserData:(NSFileManager *)file path:(NSString *)path {
     
     BOOL exists = [file fileExistsAtPath:self.path];
@@ -114,11 +92,11 @@
 }
 #ifdef DEBUG
 - (NSString *)user {
-    return @"userData_Debug";
+    return @"UserData_Debug";
 }
 #else
 - (NSString *)user {
-    return @"userData";
+    return @"UserData";
 }
 #endif
 @end
