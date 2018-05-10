@@ -46,6 +46,15 @@
     
 }
 
+- (BOOL)remove {
+    BOOL existsNoMore = YES;
+    NSFileManager *file = [NSFileManager defaultManager];
+    if ([file fileExistsAtPath:[self pathOfUserData]]) {
+        existsNoMore = [file removeItemAtPath:[self pathOfUserData] error:nil];
+    }
+    return existsNoMore;
+}
+
 - (BOOL)writeUserData:(NSData *)userData {
     
     NSFileManager *file = [NSFileManager defaultManager];

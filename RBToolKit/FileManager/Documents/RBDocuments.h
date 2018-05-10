@@ -16,6 +16,9 @@
 ///读取数据
 - (id)read;
 
+///移除数据
+- (BOOL)remove;
+
 @end
 
 @interface RBDocuments : RBDir
