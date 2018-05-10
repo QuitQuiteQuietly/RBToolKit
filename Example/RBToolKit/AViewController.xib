@@ -36,8 +36,32 @@
                         <action selector="toB:" destination="-1" eventType="touchUpInside" id="oPx-2a-7ZH"/>
                     </connections>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q4T-z4-sCX" customClass="RBUpTextField">
+                    <rect key="frame" x="20" y="189" width="335" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="mSf-DD-qjc"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k9O-U4-OdG" customClass="RBUpTextField">
+                    <rect key="frame" x="20" y="244" width="335" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="q4T-z4-sCX" secondAttribute="trailing" constant="20" id="AFV-D7-HYt"/>
+                <constraint firstItem="k9O-U4-OdG" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="E4i-GH-cjr"/>
+                <constraint firstItem="q4T-z4-sCX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KMq-xw-ChO"/>
+                <constraint firstItem="q4T-z4-sCX" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="TSK-9X-Blo"/>
+                <constraint firstItem="k9O-U4-OdG" firstAttribute="top" secondItem="q4T-z4-sCX" secondAttribute="bottom" constant="5" id="Xlv-eP-fAc"/>
+                <constraint firstItem="q4T-z4-sCX" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="169" id="f8H-go-XVD"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="k9O-U4-OdG" secondAttribute="trailing" constant="20" id="jIf-b4-3Kh"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
     </objects>

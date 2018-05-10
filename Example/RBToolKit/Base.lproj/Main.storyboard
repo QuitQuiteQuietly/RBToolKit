@@ -112,11 +112,32 @@
                                     <color key="titleColor" red="0.062745098040000002" green="0.1215686275" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="3Rz-qN-YEF">
+                                <rect key="frame" x="0.0" y="64" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDa-Po-DGs">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Prh-6k-cyc">
+                                        <rect key="frame" x="0.0" y="34" width="375" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qjs-jL-U0i" firstAttribute="centerX" secondItem="kqn-OB-PZ9" secondAttribute="centerX" id="PLr-Hs-YC2"/>
                             <constraint firstItem="qjs-jL-U0i" firstAttribute="centerY" secondItem="kqn-OB-PZ9" secondAttribute="centerY" id="VEp-Hn-hAq"/>
+                            <constraint firstAttribute="trailing" secondItem="3Rz-qN-YEF" secondAttribute="trailing" id="veK-cG-qZO"/>
+                            <constraint firstItem="3Rz-qN-YEF" firstAttribute="leading" secondItem="kqn-OB-PZ9" secondAttribute="leading" id="ySI-ZF-I61"/>
+                            <constraint firstItem="3Rz-qN-YEF" firstAttribute="top" secondItem="q4W-Mp-8P0" secondAttribute="bottom" id="zES-5q-x66"/>
                         </constraints>
                     </view>
                 </viewController>
