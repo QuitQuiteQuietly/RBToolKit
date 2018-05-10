@@ -1,4 +1,4 @@
-//
+
 //  RBViewController.m
 //  RBToolKit
 //
@@ -15,11 +15,14 @@
 
 #import <ReactiveObjC/ReactiveObjC.h>
 
+#import <RBToolKit/RBFileManager.h>
+
 @interface RBViewController ()
 
 /**  */
 @property (nonatomic, weak)IBOutlet UIImageView *imageView;
-
+/**  */
+@property (nonatomic, weak)RBFileManager *f;
 @end
 
 @implementation RBViewController
@@ -34,9 +37,11 @@
         NSLog(@"1f3");
     }
     
+  
     
+    [self checkFilePath];
     
-   UIImage *i = [UIImage animatedImageWithImages:@[[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"3"],[UIImage imageNamed:@"4"]] duration:2];
+    UIImage *i = [UIImage animatedImageWithImages:@[[UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"3"],[UIImage imageNamed:@"4"]] duration:2];
     
     self.imageView.image = i;
     
@@ -53,7 +58,22 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+//测试组件。filemanager
+- (void)checkFilePath {
+    
+    NSLog(@"%@", self.f);
+    
+    NSData *d = [@"13213" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    RBFileManager *f = [RBFileManager new];
+    NSLog(@"%d", f.documents.user.write(d));
+    NSLog(@"%@", f.tmp.path);
+    self.f = f;
+    
+}
+
 - (IBAction)toAVc:(id)sender {
+
     AViewController *a = [AViewController new];
     
     @weakify(self)
