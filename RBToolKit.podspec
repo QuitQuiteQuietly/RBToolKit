@@ -19,7 +19,7 @@ TODO: Add long description of the pod here.
 
 
     s.subspec 'InterFace' do |inter|
-        inter.source_files = 'RBToolKit/InterFace/*.{h,m}', 'RBToolKit/InterFace/Category/*.{h,m}'
+        inter.source_files = 'RBToolKit/InterFace/*.{h,m}', 'RBToolKit/InterFace/Category/*.{h,m}', 'RBToolKit/TransitionButton/*.{h,m}'
     end
 
     s.subspec 'Time' do |time|

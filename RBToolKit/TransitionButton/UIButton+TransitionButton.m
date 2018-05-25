@@ -5,14 +5,29 @@
 //  Created by Ray on 2018/5/25.
 //
 
-#import "TransitionButton.h"
+#import "UIButton+TransitionButton.h"
 
 #import "Indicator.h"
 
-@interface TransitionButton ()
+#import <ObjC/runtime.h>
 
-/**  */
-@property (nonatomic, strong)Indicator *indicator;
+//@interface TransitionButton ()
+//
+///**  */
+//@property (nonatomic, strong)Indicator *indicator;
+//
+///**  */
+//@property (nonatomic, strong)UIImage *cacheImage;
+//
+///**  */
+//@property (nonatomic, strong)NSString *cacheTitle;
+//
+//@end
+
+static void *cache_Image = @"cacheImage";
+static void *cache_Title = @"cacheTitle";
+
+@interface UIButton (CacheOrigin)
 
 /**  */
 @property (nonatomic, strong)UIImage *cacheImage;
@@ -22,8 +37,26 @@
 
 @end
 
+@implementation UIButton (CacheOrigin)
 
-@implementation TransitionButton
+- (void)setCacheImage:(UIImage *)cacheImage {
+    objc_setAssociatedObject(self, &cache_Image, cacheImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (void)setCacheTitle:(NSString *)cacheTitle {
+    objc_setAssociatedObject(self, &cache_Title, cacheTitle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (UIImage *)cacheImage {
+    return objc_getAssociatedObject(self, &cache_Image);
+}
+- (NSString *)cacheTitle {
+    return objc_getAssociatedObject(self, &cache_Title);
+}
+
+@end
+
+static void *indicator = @"indicator";
+
+@implementation UIButton (TransitionButton)
 
 - (void)start {
     
@@ -92,6 +125,8 @@
     [self storgeOriginState:NO];
     
     if (small) {
+        NSLog(@"%@", [self indicator]);
+        
         [self.indicator animation];
     }
     else {
@@ -125,10 +160,21 @@
 //}
 
 - (Indicator *)indicator {
-    if (!_indicator) {
-        _indicator = [[Indicator alloc]initWithFrame:self.frame];
-        [self.layer addSublayer:_indicator];
+    
+    Indicator *ind = objc_getAssociatedObject(self, &indicator);
+    
+    if (!ind) {
+        
+        ind = [[Indicator alloc]initWithFrame:self.frame];
+        
+        objc_setAssociatedObject(self, &indicator, ind, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
     }
-    return _indicator;
+    
+    [self.layer addSublayer:ind];
+    
+    return ind;
 }
+
+
 @end

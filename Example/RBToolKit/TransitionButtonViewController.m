@@ -8,12 +8,12 @@
 
 #import "TransitionButtonViewController.h"
 
-#import <RBToolKit/TransitionButton.h>
+#import <RBToolKit/UIButton+TransitionButton.h>
 
 @interface TransitionButtonViewController ()
 
 /**  */
-@property (nonatomic, weak)IBOutlet TransitionButton *button;
+@property (nonatomic, weak)IBOutlet UIButton *button;
 
 @end
 
@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
 }
 
-- (IBAction)transition:(TransitionButton *)sender {
+- (IBAction)transition:(UIButton *)sender {
     
     [sender start];
     

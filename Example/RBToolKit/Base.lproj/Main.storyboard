@@ -231,7 +231,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bb-kt-Hc5" customClass="TransitionButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bb-kt-Hc5">
                                 <rect key="frame" x="20" y="313.5" width="335" height="40"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.37647058820000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -262,7 +262,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="button" destination="6bb-kt-Hc5" id="ROi-7g-MRY"/>
+                        <outlet property="button" destination="6bb-kt-Hc5" id="l3N-Vw-FUM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dmL-i2-OiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

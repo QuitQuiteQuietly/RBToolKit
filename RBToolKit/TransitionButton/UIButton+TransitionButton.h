@@ -16,7 +16,7 @@
  
  */
 
-@interface TransitionButton : UIButton
+@interface UIButton(TransitionButton)
 
 - (void)start;
 
