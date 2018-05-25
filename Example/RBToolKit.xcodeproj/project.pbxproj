@@ -23,6 +23,7 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7189242120A9714100D1AF03 /* RBLockViewController.m */; };
+		71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */; };
 		71FCA28D209C58A60042BB01 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FCA28B209C58A60042BB01 /* AViewController.m */; };
 		71FCA28E209C58A60042BB01 /* AViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FCA28C209C58A60042BB01 /* AViewController.xib */; };
 		71FCA292209C58AE0042BB01 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FCA290209C58AE0042BB01 /* BViewController.m */; };
@@ -70,6 +71,8 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7189242020A9714100D1AF03 /* RBLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBLockViewController.h; sourceTree = "<group>"; };
 		7189242120A9714100D1AF03 /* RBLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBLockViewController.m; sourceTree = "<group>"; };
+		71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionButtonViewController.h; sourceTree = "<group>"; };
+		71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransitionButtonViewController.m; sourceTree = "<group>"; };
 		71FCA28A209C58A60042BB01 /* AViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
 		71FCA28B209C58A60042BB01 /* AViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
 		71FCA28C209C58A60042BB01 /* AViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AViewController.xib; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 				6003F59C195388D20070C39A /* RBAppDelegate.h */,
 				6003F59D195388D20070C39A /* RBAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */,
+				71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */,
 				6003F5A5195388D20070C39A /* RBViewController.h */,
 				6003F5A6195388D20070C39A /* RBViewController.m */,
 				71FCA28A209C58A60042BB01 /* AViewController.h */,
@@ -407,6 +412,7 @@
 			files = (
 				71FCA28D209C58A60042BB01 /* AViewController.m in Sources */,
 				7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */,
+				71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */,
 				6003F59E195388D20070C39A /* RBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* RBViewController.m in Sources */,
 				71FCA292209C58AE0042BB01 /* BViewController.m in Sources */,

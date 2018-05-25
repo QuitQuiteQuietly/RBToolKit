@@ -93,6 +93,14 @@
                                     <segue destination="lU1-bL-e9f" kind="show" id="35w-UR-alX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="et8-oG-UlF">
+                                <rect key="frame" x="85" y="129" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="动画button"/>
+                                <connections>
+                                    <segue destination="053-Yc-0YL" kind="show" id="0eb-6b-Csp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -210,6 +218,56 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pj4-wI-abj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="304.80000000000001" y="1112.2938530734634"/>
+        </scene>
+        <!--Transition Button View Controller-->
+        <scene sceneID="CrJ-2L-uSX">
+            <objects>
+                <viewController id="053-Yc-0YL" customClass="TransitionButtonViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HAZ-hI-9jC"/>
+                        <viewControllerLayoutGuide type="bottom" id="cfp-0U-HF6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="785-IF-29n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bb-kt-Hc5" customClass="TransitionButton">
+                                <rect key="frame" x="20" y="313.5" width="335" height="40"/>
+                                <color key="backgroundColor" red="0.18039215689999999" green="0.37647058820000001" blue="0.56078431370000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="oFA-8a-BBb"/>
+                                </constraints>
+                                <state key="normal" title="按钮">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="transition:" destination="053-Yc-0YL" eventType="touchUpInside" id="e2s-7i-wYQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Evc-l9-wyh">
+                                <rect key="frame" x="220" y="161" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="stop:" destination="053-Yc-0YL" eventType="touchUpInside" id="oqe-LW-ixR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6bb-kt-Hc5" firstAttribute="centerX" secondItem="785-IF-29n" secondAttribute="centerX" id="Eus-ej-hrM"/>
+                            <constraint firstItem="6bb-kt-Hc5" firstAttribute="leading" secondItem="785-IF-29n" secondAttribute="leading" constant="20" id="Rd6-ey-NxB"/>
+                            <constraint firstItem="6bb-kt-Hc5" firstAttribute="centerY" secondItem="785-IF-29n" secondAttribute="centerY" id="q8q-Gd-YHc"/>
+                            <constraint firstAttribute="trailing" secondItem="6bb-kt-Hc5" secondAttribute="trailing" constant="20" id="sVf-Rp-WVx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="6bb-kt-Hc5" id="ROi-7g-MRY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dmL-i2-OiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="834" y="-193"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="V9U-pm-HtS">
