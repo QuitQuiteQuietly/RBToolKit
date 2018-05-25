@@ -24,10 +24,14 @@
     NSLog(@"presentingViewController %p", self.presentingViewController);
     
     NSArray *array = @[@3,@4,@5,@1,@245,@13];
-    RACSequence *r = [[array.rac_sequence filter:^BOOL(NSNumber*  _Nullable value) {
+   RACSequence *r = [[array.rac_sequence filter:^BOOL(NSNumber*  _Nullable value) {
         return value.integerValue > 1;
     }] map:^id _Nullable(NSNumber*  _Nullable value) {
         return [NSString stringWithFormat:@"123RR%@", value];
+    }];
+    
+    RACSignal *s = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        return nil;
     }];
     
     NSArray *d = [r array];

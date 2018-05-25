@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -76,6 +77,22 @@
                                     <action selector="toAVc:" destination="whP-gf-Uak" eventType="touchUpInside" id="qaf-rl-y5G"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOf-52-KYq">
+                                <rect key="frame" x="278" y="138" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="isS"/>
+                                <connections>
+                                    <action selector="isSStillThere" destination="whP-gf-Uak" eventType="touchUpInside" id="tiq-79-zkb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9F-gZ-suE">
+                                <rect key="frame" x="177" y="617" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="锁控件"/>
+                                <connections>
+                                    <segue destination="lU1-bL-e9f" kind="show" id="35w-UR-alX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -88,11 +105,111 @@
                     <navigationItem key="navigationItem" id="86x-6J-flD"/>
                     <connections>
                         <outlet property="imageView" destination="FiG-2a-qvv" id="fVa-hW-xBr"/>
+                        <outletCollection property="f" destination="lOf-52-KYq" id="zBy-7l-9ky"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tc2-Qw-aMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="304.80000000000001" y="432.23388305847078"/>
+        </scene>
+        <!--Lock View Controller-->
+        <scene sceneID="XlC-wp-weu">
+            <objects>
+                <viewController id="lU1-bL-e9f" customClass="RBLockViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dwR-si-niN"/>
+                        <viewControllerLayoutGuide type="bottom" id="e0W-Bn-AMA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jRl-Xk-iBZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZFK-RK-Cjc">
+                                <rect key="frame" x="0.0" y="64" width="121" height="178"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UuE-ZB-Vjv">
+                                        <rect key="frame" x="48" y="0.0" width="25" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rED-E1-y4W">
+                                        <rect key="frame" x="0.0" y="30" width="121" height="29"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZh-n6-XXV">
+                                        <rect key="frame" x="37.5" y="58" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sly-IX-XGS">
+                                        <rect key="frame" x="37.5" y="88" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7J9-rB-59d">
+                                        <rect key="frame" x="36" y="118" width="51" height="31"/>
+                                    </switch>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="1JC-xc-GMn">
+                                        <rect key="frame" x="13.5" y="149" width="94" height="29"/>
+                                    </stepper>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lxd-kV-5pS">
+                                <rect key="frame" x="16" y="637" width="343" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-Lx-ksn">
+                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="30"/>
+                                        <state key="normal" title="Lock"/>
+                                        <connections>
+                                            <action selector="lock:" destination="lU1-bL-e9f" eventType="touchUpInside" id="0ut-d9-OR8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4HF-4F-1W3">
+                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="30"/>
+                                        <state key="normal" title="UnLock"/>
+                                        <connections>
+                                            <action selector="unLock:" destination="lU1-bL-e9f" eventType="touchUpInside" id="f8t-dJ-06T"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v3x-TZ-kSj">
+                                <rect key="frame" x="0.0" y="479" width="375" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="NR9-O7-yAN"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lxd-kV-5pS" firstAttribute="leading" secondItem="jRl-Xk-iBZ" secondAttribute="leadingMargin" id="6Gh-Bt-xf9"/>
+                            <constraint firstAttribute="trailing" secondItem="v3x-TZ-kSj" secondAttribute="trailing" id="6nv-8n-juj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lxd-kV-5pS" secondAttribute="trailing" id="933-BW-7D5"/>
+                            <constraint firstItem="v3x-TZ-kSj" firstAttribute="leading" secondItem="jRl-Xk-iBZ" secondAttribute="leading" id="Khc-OE-Aqe"/>
+                            <constraint firstItem="e0W-Bn-AMA" firstAttribute="top" secondItem="lxd-kV-5pS" secondAttribute="bottom" id="M3t-7I-WDR"/>
+                            <constraint firstItem="ZFK-RK-Cjc" firstAttribute="leading" secondItem="jRl-Xk-iBZ" secondAttribute="leading" id="dBX-Jm-HM0"/>
+                            <constraint firstItem="ZFK-RK-Cjc" firstAttribute="top" secondItem="dwR-si-niN" secondAttribute="bottom" id="gqu-Zk-Q1I"/>
+                            <constraint firstItem="lxd-kV-5pS" firstAttribute="top" secondItem="v3x-TZ-kSj" secondAttribute="bottom" constant="94" id="y3g-VW-TcR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="v3x-TZ-kSj" id="TyR-zE-ZBs"/>
+                        <outletCollection property="lock" destination="sly-IX-XGS" id="Ea1-2h-j7G"/>
+                        <outletCollection property="lock" destination="dZh-n6-XXV" id="aLg-IY-GQv"/>
+                        <outletCollection property="lock" destination="rED-E1-y4W" id="F0M-t5-PEW"/>
+                        <outletCollection property="lock" destination="UuE-ZB-Vjv" id="GhD-hF-qkc"/>
+                        <outletCollection property="lock" destination="7J9-rB-59d" id="9CY-Q1-aH3"/>
+                        <outletCollection property="lock" destination="1JC-xc-GMn" id="xfg-rk-ges"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pj4-wI-abj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="1112.2938530734634"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="V9U-pm-HtS">
