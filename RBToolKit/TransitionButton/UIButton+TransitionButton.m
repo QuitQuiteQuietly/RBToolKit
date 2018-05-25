@@ -26,6 +26,7 @@
 
 static void *cache_Image = @"cacheImage";
 static void *cache_Title = @"cacheTitle";
+static void *cache_Corner = @"cache_Corner";
 
 @interface UIButton (CacheOrigin)
 
@@ -35,10 +36,15 @@ static void *cache_Title = @"cacheTitle";
 /**  */
 @property (nonatomic, strong)NSString *cacheTitle;
 
+/**  */
+@property (nonatomic, assign)CGFloat cacheCorner;
+
 @end
 
 @implementation UIButton (CacheOrigin)
-
+- (void)setCacheCorner:(CGFloat)cacheCorner {
+    objc_setAssociatedObject(self, &cache_Corner, @(cacheCorner), OBJC_ASSOCIATION_ASSIGN);
+}
 - (void)setCacheImage:(UIImage *)cacheImage {
     objc_setAssociatedObject(self, &cache_Image, cacheImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -51,6 +57,9 @@ static void *cache_Title = @"cacheTitle";
 - (NSString *)cacheTitle {
     return objc_getAssociatedObject(self, &cache_Title);
 }
+- (CGFloat)cacheCorner {
+    return [objc_getAssociatedObject(self, &cache_Corner) floatValue];
+}
 
 @end
 
@@ -62,15 +71,11 @@ static void *indicator = @"indicator";
     
     self.userInteractionEnabled = NO;
     
+    self.layer.cornerRadius = 4;
+    
     [self storgeOriginState:YES];
     
-    [self setTitle:@"" forState:UIControlStateNormal];
-    
-    [UIView animateWithDuration:0.1 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.layer.cornerRadius = self.frame.size.height / 2;
-    } completion:^(BOOL finished) {
-        [self shrink:YES];
-    }];
+    [self shrink:YES];
     
 }
 
@@ -80,10 +85,15 @@ static void *indicator = @"indicator";
     if (storge) {
         self.cacheImage = [self imageForState:UIControlStateNormal];
         self.cacheTitle = [self titleForState:UIControlStateNormal];
+        self.cacheCorner = self.layer.cornerRadius;
+        
+        [self setTitle:@"" forState:UIControlStateNormal];
+        
     }
     else {
         [self setTitle:self.cacheTitle forState:UIControlStateNormal];
         [self setImage:self.cacheImage forState:UIControlStateNormal];
+        self.layer.cornerRadius = self.cacheCorner;
     }
     
 }
@@ -125,8 +135,8 @@ static void *indicator = @"indicator";
     [self storgeOriginState:NO];
     
     if (small) {
-        NSLog(@"%@", [self indicator]);
-        
+        self.layer.cornerRadius = self.frame.size.height / 2;
+
         [self.indicator animation];
     }
     else {
