@@ -55,6 +55,13 @@
     
 }
 
+- (IBAction)transition_3:(UIButton *)sender {
+    
+    [sender start:^(TransitionConfig *config) {
+        config.afterDone = eTransitionDoneExpand;
+    }];
+    
+}
 
 - (IBAction)stop:(UIButton *)sender {
     

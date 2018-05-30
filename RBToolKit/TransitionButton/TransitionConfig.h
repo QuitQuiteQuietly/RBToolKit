@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, eTransitionType) {
 typedef NS_ENUM(NSUInteger, eIndicatorPosition) {
     eIndicatorPositionLeading,
     eIndicatorPositionCenter,
-    eIndicatorPositionTrailing,
+    eIndicatorPositionTrailing
 };
 
 @interface TransitionStyle : NSObject

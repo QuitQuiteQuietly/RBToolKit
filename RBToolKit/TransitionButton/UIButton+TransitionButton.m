@@ -28,6 +28,7 @@ static void *cache_Image = @"cacheImage";
 static void *cache_Title = @"cacheTitle";
 static void *cache_Corner = @"cache_Corner";
 static void *config_key = @"config_tran";
+static void *indicating_key = @"indicating";
 
 @interface UIButton (CacheOrigin)
 
@@ -43,9 +44,15 @@ static void *config_key = @"config_tran";
 /**  */
 @property (nonatomic, strong)TransitionConfig *config;
 
+/**  */
+@property (nonatomic, assign)BOOL indicating;
+
 @end
 
 @implementation UIButton (CacheOrigin)
+- (void)setIndicating:(BOOL)indicating {
+    objc_setAssociatedObject(self, &indicating_key, @(indicating), OBJC_ASSOCIATION_ASSIGN);
+}
 - (void)setCacheCorner:(CGFloat)cacheCorner {
     objc_setAssociatedObject(self, &cache_Corner, @(cacheCorner), OBJC_ASSOCIATION_ASSIGN);
 }
@@ -61,6 +68,9 @@ static void *config_key = @"config_tran";
 - (TransitionConfig *)config {
    return objc_getAssociatedObject(self, &config_key);
 }
+- (BOOL)indicating {
+    return [objc_getAssociatedObject(self, &indicating_key) boolValue];
+}
 - (UIImage *)cacheImage {
     return objc_getAssociatedObject(self, &cache_Image);
 }
@@ -75,7 +85,14 @@ static void *config_key = @"config_tran";
 
 static void *indicator = @"indicator";
 
+
 @implementation UIButton (TransitionButton)
+
+- (void)start {
+    
+    [self start:nil];
+    
+}
 
 - (void)start:(void (^)(TransitionConfig *))config {
     
@@ -94,7 +111,6 @@ static void *indicator = @"indicator";
     switch (self.config.style.style) {
 
         case eTransitionTypeNormal:
-            [self indicatorStart:YES];
             break;
         case eTransitionTypeShrik:
             [self shrink:YES];
@@ -102,14 +118,12 @@ static void *indicator = @"indicator";
             
     }
     
+    self.indicating = YES;
+    
+    [self indicatorStart:YES];
     
 }
 
-- (void)start {
-    
-    [self start:nil];
-    
-}
 
 
 - (void)storgeOriginState:(BOOL)storge {
@@ -132,38 +146,44 @@ static void *indicator = @"indicator";
 
 - (void)stop {
     
+    if (!self.indicating) {
+        return;
+    }
+    
+    self.indicating = NO;
+    
     self.userInteractionEnabled = YES;
     
-    [self.indicator stop];
+    [self indicatorStart:NO];
     
     switch (self.config.style.style) {
 
         case eTransitionTypeNormal:
-            [self storgeOriginState:NO];
             break;
         case eTransitionTypeShrik:
             [self shrink:NO];
             break;
     }
+    
+    switch (self.config.afterDone) {
+
+        case eTransitionDoneNormal:
+            break;
+        case eTransitionDoneExpand:
+            [self expand];
+            return;
+    }
+    
+    [self storgeOriginState:NO];
 }
-//
-//- (void)backOriginState {
-//
-//    [self shrink:NO];
-//
-//}
+
 /**
  缩放
 
  @param small 缩小/还原
  */
 - (void)shrink:(BOOL)small {
-    
-    if (!small && (eTransitionDoneExpand == self.config.afterDone)) {
-        [self expand];
-        return;
-    }
-    
+
     CGFloat from = small ? self.frame.size.width : self.bounds.size.height;
     CGFloat to = small ? self.frame.size.height : self.bounds.size.width;
 
@@ -181,14 +201,8 @@ static void *indicator = @"indicator";
 
     if (small) {
         self.layer.cornerRadius = self.frame.size.height / 2;
-
-        [self indicatorStart:YES];
     }
-    else {
-
-        [self storgeOriginState:NO];
     
-    }
 }
 
 - (void)indicatorStart:(BOOL)start {
@@ -210,7 +224,7 @@ static void *indicator = @"indicator";
     expandAnim.timingFunction = expandCurve;
     expandAnim.duration = 0.3;
     expandAnim.fillMode = kCAFillModeForwards;
-    expandAnim.removedOnCompletion  = NO;
+    expandAnim.removedOnCompletion  = YES;
 
     [CATransaction setCompletionBlock:^{
         [self.indicator stop];
@@ -252,6 +266,7 @@ static void *indicator = @"indicator";
     
     return ind;
 }
+
 
 
 @end
