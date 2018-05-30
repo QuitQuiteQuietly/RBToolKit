@@ -14,6 +14,7 @@
 
 /**  */
 @property (nonatomic, weak)IBOutlet UIButton *button;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *tButtons;
 
 @end
 
@@ -24,17 +25,42 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)transition_0:(UIButton *)sender {
+    
+    [sender start:^(TransitionConfig *config) {
+        config.style.position = eIndicatorPositionLeading;
+    }];
+    
+}
+
 - (IBAction)transition:(UIButton *)sender {
     
-    [sender start];
+    [sender start:nil];
+    
+}
+
+- (IBAction)transition_1:(UIButton *)sender {
+    
+    [sender start:^(TransitionConfig *config) {
+        config.style.style = eTransitionTypeShrik;
+    }];
+    
+}
+
+- (IBAction)transition_2:(UIButton *)sender {
+    
+    [sender start:^(TransitionConfig *config) {
+        config.style.position = eIndicatorPositionTrailing;
+    }];
     
 }
 
 
-- (IBAction)stop:(id)sender {
+- (IBAction)stop:(UIButton *)sender {
     
-    
-    [self.button stop];
+    for (UIButton *b in _tButtons) {
+        [b stop];
+    }
     
 }
 

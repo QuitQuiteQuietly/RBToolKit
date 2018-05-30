@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+#import "TransitionConfig.h"
 /**
  
  * Inspire by AladinWay/TransitionButton
@@ -16,9 +16,14 @@
  
  */
 
-@interface UIButton(TransitionButton)
+
+
+@interface UIButton (TransitionButton)
 
 - (void)start;
+
+
+- (void)start:(void (^)(TransitionConfig *config))config;
 
 - (void)stop;
 

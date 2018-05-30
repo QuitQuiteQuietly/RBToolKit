@@ -27,6 +27,7 @@
 static void *cache_Image = @"cacheImage";
 static void *cache_Title = @"cacheTitle";
 static void *cache_Corner = @"cache_Corner";
+static void *config_key = @"config_tran";
 
 @interface UIButton (CacheOrigin)
 
@@ -39,6 +40,9 @@ static void *cache_Corner = @"cache_Corner";
 /**  */
 @property (nonatomic, assign)CGFloat cacheCorner;
 
+/**  */
+@property (nonatomic, strong)TransitionConfig *config;
+
 @end
 
 @implementation UIButton (CacheOrigin)
@@ -50,6 +54,12 @@ static void *cache_Corner = @"cache_Corner";
 }
 - (void)setCacheTitle:(NSString *)cacheTitle {
     objc_setAssociatedObject(self, &cache_Title, cacheTitle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (void)setConfig:(TransitionConfig *)config {
+    objc_setAssociatedObject(self, &config_key, config, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+- (TransitionConfig *)config {
+   return objc_getAssociatedObject(self, &config_key);
 }
 - (UIImage *)cacheImage {
     return objc_getAssociatedObject(self, &cache_Image);
@@ -67,15 +77,37 @@ static void *indicator = @"indicator";
 
 @implementation UIButton (TransitionButton)
 
-- (void)start {
+- (void)start:(void (^)(TransitionConfig *))config {
+    
+    TransitionConfig *c = [TransitionConfig config];
+    
+    if (config) {
+        config(c);
+    }
+    
+    self.config = c;
     
     self.userInteractionEnabled = NO;
     
-    self.layer.cornerRadius = 4;
-    
     [self storgeOriginState:YES];
     
-    [self shrink:YES];
+    switch (self.config.style.style) {
+
+        case eTransitionTypeNormal:
+            [self indicatorStart:YES];
+            break;
+        case eTransitionTypeShrik:
+            [self shrink:YES];
+            break;
+            
+    }
+    
+    
+}
+
+- (void)start {
+    
+    [self start:nil];
     
 }
 
@@ -86,7 +118,7 @@ static void *indicator = @"indicator";
         self.cacheImage = [self imageForState:UIControlStateNormal];
         self.cacheTitle = [self titleForState:UIControlStateNormal];
         self.cacheCorner = self.layer.cornerRadius;
-        
+
         [self setTitle:@"" forState:UIControlStateNormal];
         
     }
@@ -100,14 +132,26 @@ static void *indicator = @"indicator";
 
 - (void)stop {
     
-    [self backOriginState];
-}
+    self.userInteractionEnabled = YES;
+    
+    [self.indicator stop];
+    
+    switch (self.config.style.style) {
 
-- (void)backOriginState {
-    
-    [self shrink:NO];
-    
+        case eTransitionTypeNormal:
+            [self storgeOriginState:NO];
+            break;
+        case eTransitionTypeShrik:
+            [self shrink:NO];
+            break;
+    }
 }
+//
+//- (void)backOriginState {
+//
+//    [self shrink:NO];
+//
+//}
 /**
  缩放
 
@@ -115,59 +159,67 @@ static void *indicator = @"indicator";
  */
 - (void)shrink:(BOOL)small {
     
+    if (!small && (eTransitionDoneExpand == self.config.afterDone)) {
+        [self expand];
+        return;
+    }
+    
     CGFloat from = small ? self.frame.size.width : self.bounds.size.height;
     CGFloat to = small ? self.frame.size.height : self.bounds.size.width;
-    
+
     CABasicAnimation *shrinkAnim = [CABasicAnimation animationWithKeyPath:@"bounds.size.width"];
     shrinkAnim.fromValue             = @(from);
     shrinkAnim.toValue               = @(to);
     shrinkAnim.duration              = 0.1;
-    
+
     CAMediaTimingFunction *shrinkCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     shrinkAnim.timingFunction        = shrinkCurve;
     shrinkAnim.fillMode              = kCAFillModeForwards;
     shrinkAnim.removedOnCompletion = NO;
-    
-    self.userInteractionEnabled = !small;
-    
+
     [self.layer addAnimation:shrinkAnim forKey:shrinkAnim.keyPath];
-    
-    [self storgeOriginState:NO];
-    
+
     if (small) {
         self.layer.cornerRadius = self.frame.size.height / 2;
 
+        [self indicatorStart:YES];
+    }
+    else {
+
+        [self storgeOriginState:NO];
+    
+    }
+}
+
+- (void)indicatorStart:(BOOL)start {
+    if (start) {
         [self.indicator animation];
     }
     else {
         [self.indicator stop];
     }
-    
 }
 
 
-//- (void)expand {
-//    CABasicAnimation *expandAnim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-//    expandAnim.fromValue            = @1;
-//    expandAnim.toValue              = @(26);
-//
-//    CAMediaTimingFunction *expandCurve = [CAMediaTimingFunction functionWithControlPoints:.95 :.02 :1 :.05];
-//    expandAnim.timingFunction = expandCurve;
-//    expandAnim.duration = 0.4;
-//    expandAnim.fillMode = kCAFillModeForwards;
-//    expandAnim.removedOnCompletion  = NO;
-//
-//    [CATransaction setCompletionBlock:^{
-//
-//
-//        [self.indicator stop];
-//
-//    }];
-//
-//    [self.layer addAnimation:expandAnim forKey:expandAnim.keyPath];
-//
-//    [CATransaction commit];
-//}
+- (void)expand {
+    CABasicAnimation *expandAnim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    expandAnim.fromValue            = @1;
+    expandAnim.toValue              = @(26);
+
+    CAMediaTimingFunction *expandCurve = [CAMediaTimingFunction functionWithControlPoints:.95 :.02 :1 :.05];
+    expandAnim.timingFunction = expandCurve;
+    expandAnim.duration = 0.3;
+    expandAnim.fillMode = kCAFillModeForwards;
+    expandAnim.removedOnCompletion  = NO;
+
+    [CATransaction setCompletionBlock:^{
+        [self.indicator stop];
+    }];
+
+    [self.layer addAnimation:expandAnim forKey:expandAnim.keyPath];
+
+    [CATransaction commit];
+}
 
 - (Indicator *)indicator {
     
@@ -181,6 +233,21 @@ static void *indicator = @"indicator";
         
     }
     
+    if (eTransitionTypeShrik != self.config.style.style) {
+        switch (self.config.style.position) {
+                
+            case eIndicatorPositionLeading:
+                break;
+            case eIndicatorPositionCenter:
+                ind.frame = CGRectMake((CGRectGetWidth(self.frame) - ind.frame.size.width) / 2, 0, ind.frame.size.width, ind.frame.size.height);
+                break;
+            case eIndicatorPositionTrailing:
+                ind.frame = CGRectMake(CGRectGetWidth(self.frame) - ind.frame.size.width, 0, ind.frame.size.width, ind.frame.size.height);
+                break;
+        }
+    }
+    
+
     [self.layer addSublayer:ind];
     
     return ind;
