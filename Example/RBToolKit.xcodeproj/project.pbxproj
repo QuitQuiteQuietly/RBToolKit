@@ -22,12 +22,11 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
+		717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54D020BED4BE00E4E815 /* ReactiveViewController.m */; };
+		717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DC20BFD9E300E4E815 /* BaseViewController.m */; };
+		717A54E020BFDA0800E4E815 /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DF20BFDA0800E4E815 /* QRViewController.m */; };
 		7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7189242120A9714100D1AF03 /* RBLockViewController.m */; };
 		71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */; };
-		71FCA28D209C58A60042BB01 /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FCA28B209C58A60042BB01 /* AViewController.m */; };
-		71FCA28E209C58A60042BB01 /* AViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FCA28C209C58A60042BB01 /* AViewController.xib */; };
-		71FCA292209C58AE0042BB01 /* BViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71FCA290209C58AE0042BB01 /* BViewController.m */; };
-		71FCA293209C58AE0042BB01 /* BViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 71FCA291209C58AE0042BB01 /* BViewController.xib */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		FA3418E5111C4A43A3B46447 /* Pods_RBToolKit_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63A1641FF2C11C92637572AB /* Pods_RBToolKit_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -69,16 +68,16 @@
 		71189FED20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		71189FEE20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		717A54CF20BED4BE00E4E815 /* ReactiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveViewController.h; sourceTree = "<group>"; };
+		717A54D020BED4BE00E4E815 /* ReactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveViewController.m; sourceTree = "<group>"; };
+		717A54DB20BFD9E300E4E815 /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		717A54DC20BFD9E300E4E815 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		717A54DE20BFDA0800E4E815 /* QRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRViewController.h; sourceTree = "<group>"; };
+		717A54DF20BFDA0800E4E815 /* QRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRViewController.m; sourceTree = "<group>"; };
 		7189242020A9714100D1AF03 /* RBLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBLockViewController.h; sourceTree = "<group>"; };
 		7189242120A9714100D1AF03 /* RBLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBLockViewController.m; sourceTree = "<group>"; };
 		71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionButtonViewController.h; sourceTree = "<group>"; };
 		71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransitionButtonViewController.m; sourceTree = "<group>"; };
-		71FCA28A209C58A60042BB01 /* AViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
-		71FCA28B209C58A60042BB01 /* AViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
-		71FCA28C209C58A60042BB01 /* AViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AViewController.xib; sourceTree = "<group>"; };
-		71FCA28F209C58AE0042BB01 /* BViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BViewController.h; sourceTree = "<group>"; };
-		71FCA290209C58AE0042BB01 /* BViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BViewController.m; sourceTree = "<group>"; };
-		71FCA291209C58AE0042BB01 /* BViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BViewController.xib; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99078488301E750F4B306C04 /* Pods_RBToolKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBToolKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F3E2EF8918350839DE2EB19 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
@@ -151,19 +150,18 @@
 		6003F593195388D20070C39A /* Example for RBToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				717A54E120BFDA0B00E4E815 /* QR */,
 				6003F59C195388D20070C39A /* RBAppDelegate.h */,
 				6003F59D195388D20070C39A /* RBAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */,
 				71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */,
+				717A54CF20BED4BE00E4E815 /* ReactiveViewController.h */,
+				717A54D020BED4BE00E4E815 /* ReactiveViewController.m */,
 				6003F5A5195388D20070C39A /* RBViewController.h */,
 				6003F5A6195388D20070C39A /* RBViewController.m */,
-				71FCA28A209C58A60042BB01 /* AViewController.h */,
-				71FCA28B209C58A60042BB01 /* AViewController.m */,
-				71FCA28C209C58A60042BB01 /* AViewController.xib */,
-				71FCA28F209C58AE0042BB01 /* BViewController.h */,
-				71FCA290209C58AE0042BB01 /* BViewController.m */,
-				71FCA291209C58AE0042BB01 /* BViewController.xib */,
+				717A54DB20BFD9E300E4E815 /* BaseViewController.h */,
+				717A54DC20BFD9E300E4E815 /* BaseViewController.m */,
 				7189242020A9714100D1AF03 /* RBLockViewController.h */,
 				7189242120A9714100D1AF03 /* RBLockViewController.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
@@ -212,6 +210,15 @@
 				9F3E2EF8918350839DE2EB19 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		717A54E120BFDA0B00E4E815 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				717A54DE20BFDA0800E4E815 /* QRViewController.h */,
+				717A54DF20BFDA0800E4E815 /* QRViewController.m */,
+			);
+			name = QR;
 			sourceTree = "<group>";
 		};
 		724B9E835D63F471346485B0 /* Pods */ = {
@@ -310,10 +317,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71FCA28E209C58A60042BB01 /* AViewController.xib in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
-				71FCA293209C58AE0042BB01 /* BViewController.xib in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -413,13 +418,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				71FCA28D209C58A60042BB01 /* AViewController.m in Sources */,
 				7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */,
 				71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */,
 				6003F59E195388D20070C39A /* RBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* RBViewController.m in Sources */,
-				71FCA292209C58AE0042BB01 /* BViewController.m in Sources */,
+				717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */,
+				717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				717A54E020BFDA0800E4E815 /* QRViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
