@@ -158,3 +158,35 @@ typedef void(^decision)(BOOL decision);
 
 
 @end
+
+
+@implementation RB_Authorization (Flash)
+
++ (void)flash:(BOOL)on {
+    
+    [self flash:on error:nil];
+    
+}
+
++ (void)flash:(BOOL)on error:(NSError *__autoreleasing *)error {
+    
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    if ([device hasTorch]) {
+        
+        BOOL locked = [device lockForConfiguration:error];
+        if (locked) {
+            
+            AVCaptureTorchMode mode = on ? AVCaptureTorchModeOn : AVCaptureTorchModeOff;
+            
+            if (device.torchMode != mode) {
+                device.torchMode = mode;
+            }
+            
+            [device unlockForConfiguration];
+        }
+    }
+    
+}
+
+@end

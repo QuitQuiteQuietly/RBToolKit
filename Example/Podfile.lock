@@ -6,6 +6,7 @@ PODS:
     - RBToolKit/File (= 0.1.1)
     - RBToolKit/InterFace (= 0.1.1)
     - RBToolKit/Localize (= 0.1.1)
+    - RBToolKit/QRScan (= 0.1.1)
     - RBToolKit/TableView (= 0.1.1)
     - RBToolKit/Time (= 0.1.1)
   - RBToolKit/CountDown (0.1.1):
@@ -13,6 +14,8 @@ PODS:
   - RBToolKit/File (0.1.1)
   - RBToolKit/InterFace (0.1.1)
   - RBToolKit/Localize (0.1.1)
+  - RBToolKit/QRScan (0.1.1):
+    - ReactiveObjC
   - RBToolKit/TableView (0.1.1):
     - MJRefresh
     - ReactiveObjC
@@ -36,7 +39,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  RBToolKit: 7c590fb8bbb19710fb5080624970c8a48db37762
+  RBToolKit: 1b15f486881825734587f55479b0376584957fc6
   ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
 
 PODFILE CHECKSUM: e3337a2c6a67f1bfc40f1593dc0defff28c8d2e2

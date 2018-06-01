@@ -8,12 +8,17 @@
 #import "QRScanView.h"
 
 #import "ReactiveObjC.h"
+
+#import "RB_QRScan.h"
+
 /** 扫描内容的 W 值 */
 #define scanBorderW 0.7 * self.frame.size.width
 /** 扫描内容的 x 值 */
 #define scanBorderX 0.5 * (1 - 0.7) * self.frame.size.width
 /** 扫描内容的 Y 值 */
 #define scanBorderY 0.5 * (self.frame.size.height - scanBorderW)
+
+#define notice_label_Height 17.f
 
 @interface QRScanView ()
 /**  */
@@ -24,6 +29,14 @@
 
 /** */
 @property (nonatomic, strong)UIImageView *scanLine;
+
+/**  */
+@property (nonatomic, strong)UIButton *flashOnBtn;
+/** 手电筒状态指示 */
+@property (nonatomic, strong)UILabel *flashNotice;
+
+/**  */
+@property (nonatomic, strong)RACMulticastConnection *flashBtnConnect;
 
 @end
 
@@ -45,6 +58,28 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        
+        [self.contentView addSubview:self.flashOnBtn];
+        [self.contentView addSubview:self.flashNotice];
+        
+        ///是否展示 手电筒 开关
+        RAC(self.flashOnBtn, hidden) = [[RACSignal combineLatest:@[[RB_QRScan scan].flashOn, RACObserve(self.flashOnBtn, selected)] reduce:^id (NSNumber *flash, NSNumber *select){
+            return @(!flash.boolValue && !select.boolValue);
+        }] takeUntil:self.rac_willDeallocSignal];
+        RAC(self.flashNotice, hidden) = RACObserve(self.flashOnBtn, hidden);
+        
+        @weakify(self)
+        RAC(self.flashNotice, text) = [[self.needFlash takeUntil:self.rac_willDeallocSignal] map:^id _Nullable(NSNumber  *_Nullable value) {
+            @strongify(self)
+            ///管理 手电筒状态文字
+            return value.boolValue ? self.config.flashNotice.first : self.config.flashNotice.second;
+        }];
+
+        ///更改 手电筒 开关状态
+        [self.flashBtnConnect.signal subscribeNext:^(UIButton * _Nullable x) {
+            x.selected = !x.selected;
+        }];
+        
     }
     return self;
 }
@@ -142,10 +177,10 @@
     self.scanLine = [UIImageView new];
 
     self.scanLine.image = image;
-//    [self addSubview:self.contentView];
-    [self addSubview:self.scanLine];
+    [self addSubview:self.contentView];
+    [self.contentView addSubview:self.scanLine];
     
-    CGRect rectX = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 12);
+    CGRect rectX = CGRectMake(0, 0, rect.size.width, 12);
     self.scanLine.frame = rectX;
     
     @weakify(self)
@@ -157,33 +192,76 @@
     [[[RACSignal interval:0.02 onScheduler:[RACScheduler mainThreadScheduler]] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSDate * _Nullable x) {
         @strongify(self)
         if (flag) {
-            frame.origin.y = scanBorderY;
+            frame.origin.y = 0;
             flag = NO;
+            
             [UIView animateWithDuration:0.02 animations:^{
                 frame.origin.y += 3;
                 self.scanLine.frame = frame;
             } completion:nil];
+            
         } else {
-            if (self.scanLine.frame.origin.y >= scanBorderY) {
-                CGFloat scanContent_MaxY = scanBorderY + self.frame.size.width - 2 * scanBorderX;
-                if (self.scanLine.frame.origin.y >= scanContent_MaxY - 10) {
-                    frame.origin.y = scanBorderY;
+            
+            if (self.scanLine.frame.origin.y >= scanBorderW) {
+
+                    frame.origin.y = 0;
                     self.scanLine.frame = frame;
                     flag = YES;
-                }
-                else {
-                    [UIView animateWithDuration:0.02 animations:^{
-                        frame.origin.y += 3;
-                        self.scanLine.frame = frame;
-                    } completion:nil];
-                }
+
             } else {
-                flag = !flag;
+                
+                [UIView animateWithDuration:0.02 animations:^{
+                    frame.origin.y += 3;
+                    self.scanLine.frame = frame;
+                } completion:nil];
+                
             }
         }
     }];
 }
 
+- (UIButton *)flashOnBtn {
+    
+    if (!_flashOnBtn) {
+        _flashOnBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *selectImage = [UIImage imageNamed:[[NSBundle bundleForClass:[self class]] pathForResource:@"flashOn" ofType:@"png"]];
+        UIImage *normalImage = [UIImage imageNamed:[[NSBundle bundleForClass:[self class]] pathForResource:@"flashOff" ofType:@"png"]];
+        CGFloat width = 30;
+        _flashOnBtn.frame = CGRectMake((CGRectGetWidth(self.contentView.bounds) - width) / 2, CGRectGetMaxY(self.contentView.bounds) - width - notice_label_Height - 8 - 3, width, width);
+        [_flashOnBtn setImage:normalImage forState:UIControlStateNormal];
+        [_flashOnBtn setImage:selectImage forState:UIControlStateSelected];
+        _flashOnBtn.backgroundColor = [UIColor clearColor];
+        
+    }
+    return _flashOnBtn;
+    
+}
+
+- (UILabel *)flashNotice {
+    if (!_flashNotice) {
+        _flashNotice = [UILabel new];
+        _flashNotice.font = [UIFont systemFontOfSize:10];
+        _flashNotice.textColor = [UIColor whiteColor];
+        _flashNotice.text = self.config.flashNotice.first;
+        _flashNotice.textAlignment = NSTextAlignmentCenter;
+        _flashNotice.frame = CGRectMake(0, CGRectGetMaxY(self.contentView.bounds) - notice_label_Height - 8, CGRectGetWidth(self.contentView.bounds), notice_label_Height);
+    }
+    return _flashNotice;
+}
+
+- (RACMulticastConnection *)flashBtnConnect {
+    if (!_flashBtnConnect) {
+        _flashBtnConnect = [[[self.flashOnBtn rac_signalForControlEvents:UIControlEventTouchUpInside] takeUntil:self.rac_willDeallocSignal] publish];
+        [_flashBtnConnect connect];
+    }
+    return _flashBtnConnect;
+}
+
+- (RACSignal *)needFlash {
+    return [self.flashBtnConnect.signal map:^id _Nullable(UIButton  *_Nullable value) {
+        return @(value.isSelected);
+    }];
+}
 
 @end
 
@@ -197,6 +275,7 @@
     c.maskBoxBoardWidth = .2;
     c.maskBoxBoardColor = [UIColor whiteColor];
     c.scanLine_display = YES;
+    c.flashNotice = [RACTuple tupleWithObjects:@"轻触照亮", @"轻触关闭", nil];
     return c;
 }
 

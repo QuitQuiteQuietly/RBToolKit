@@ -39,7 +39,6 @@ static RB_QRScan *_scan;
     if (!_video_data_Output) {
         ///创建摄像数据输出流
         _video_data_Output = [AVCaptureVideoDataOutput new];
-        [self setSampleBuffer:YES];
         // 设置扫描范围（每一个取值0～1，以屏幕右上角为坐标原点）
         // 注：微信二维码的扫描范围是整个屏幕，这里并没有做处理（可不用设置）;
         // 如需限制扫描框范围，打开下一句注释代码并进行相应调整
@@ -72,6 +71,7 @@ static RB_QRScan *_scan;
     [_session addOutput:metadataOutput];
     // 5(1)添加摄像输出流到会话对象；与 3(1) 构成识了别光线强弱
     [_session addOutput:self.video_data_Output];
+    [self setSampleBuffer:YES];
     
     // 6、添加摄像设备输入流到会话对象
     [_session addInput:deviceInput];

@@ -25,3 +25,19 @@ typedef void(^pass)(eAuthorizeOption op, BOOL pass);
 
 
 @end
+
+
+
+@interface RB_Authorization (Flash)
+
+
+/**
+ 是否开启手电筒
+
+ @param on 是否开启
+ */
++ (void)flash:(BOOL)on;
+
++ (void)flash:(BOOL)on error:(NSError **)error;
+
+@end

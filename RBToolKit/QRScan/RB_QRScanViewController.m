@@ -17,6 +17,9 @@
 
 @interface RB_QRScanViewController ()
 
+/**  */
+@property (nonatomic, strong)QRScanView *scanView;
+
 @end
 
 @implementation RB_QRScanViewController
@@ -25,11 +28,17 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor blackColor];
-    QRScanView *view = [[QRScanView alloc]initWithFrame:self.view.bounds];
-    [self.view addSubview:view];
+    
+    self.scanView = [[QRScanView alloc]initWithFrame:self.view.bounds];
+    
+    ///管理 手电筒
+    [[self.scanView.needFlash takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
+        [RB_Authorization flash:x.boolValue];
+    }];
+    
+    [self.view addSubview:self.scanView];
     
     @weakify(self)
-
     [RB_Authorization authorize:^(eAuthorizeOption op, BOOL pass) {
         @strongify(self)
         
@@ -38,34 +47,22 @@
             [[RB_QRScan scan] getReady:^(AVCaptureVideoPreviewLayer *layer) {
                 [self.view.layer insertSublayer:layer atIndex:0];
             }];
-            
-            [[[RB_QRScan scan].flashOn takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id  _Nullable x) {
-                NSLog(@"fasdgsafds%@", x);
-            }];
+
             
             [RB_QRScan scan].sessionStatus = self.rac_willDeallocSignal;
             
         }
         
-    } option:eAuthorizeOptionCamera | eAuthorizeOptionAlbum_read_write];
+    } option:eAuthorizeOptionCamera];
     
     
-    // Do any additional setup after loading the view.
+    ///确认手电筒关闭
+    [self.rac_willDeallocSignal subscribeCompleted:^{
+        [RB_Authorization flash:NO];
+    }];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
