@@ -36,13 +36,19 @@ TODO: Add long description of the pod here.
         cd.source_files = 'RBToolKit/CountDown/*.{h,m}'
         cd.dependency 'ReactiveObjC'
     end
+    
     s.subspec 'Localize' do |local|
     local.source_files = 'RBToolKit/Localize/*.{h,m}'
     end
+    
     s.subspec 'File' do |f|
         f.source_files = 'RBToolKit/FileManager/*.{h,m}', 'RBToolKit/FileManager/Documents/*.{h,m}'
     end
 
+    s.subspec 'QRScan' do |qr|
+        qr.source_files = 'RBToolKit/QRScan/**/*'
+        qr.dependency 'ReactiveObjC'
+    end
 
   s.ios.deployment_target = '8.0'
 

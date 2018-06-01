@@ -8,8 +8,12 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_OPTIONS(NSUInteger, eAuthorizeOption) {
-    eAuthorizeOptionAlbum = 1 << 0,
-    eAuthorizeOptionCamera = 1 << 1
+    ///相机
+    eAuthorizeOptionCamera = 1 << 0,
+    ///相册 读
+    eAuthorizeOptionAlbum_read = 1 << 1,
+    ///相机 写
+    eAuthorizeOptionAlbum_read_write = 1 << 2,
 };
 
 typedef void(^pass)(eAuthorizeOption op, BOOL pass);

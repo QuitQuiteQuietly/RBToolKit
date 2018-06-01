@@ -10,7 +10,7 @@
 
 #import <RBToolKit/QRGenerate.h>
 
-#import <RBToolKit/RB_Authorization.h>
+#import <RBToolKit/RB_QRScanViewController.h>
 
 @interface QRViewController ()
 
@@ -23,18 +23,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     _qr_imageView.image = [QRGenerate qr_info:@"wzc5670594" width:CGRectGetWidth(_qr_imageView.frame)];
     
+    UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"扫一扫"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
+
+    self.navigationItem.rightBarButtonItem = item;
+}
+
+- (void)scan {
     
-    [RB_Authorization authorize:^(eAuthorizeOption op, BOOL pass) {
-        
-        NSString *f = op == eAuthorizeOptionCamera ? @"camera" : @"album";
-        
-        NSLog(@"%@ %d %@", f, pass, [NSThread currentThread]);
-        
-    } option:eAuthorizeOptionCamera | eAuthorizeOptionAlbum];
-    
-    
+    [self.navigationController pushViewController:[RB_QRScanViewController new] animated:YES];
     
 }
 

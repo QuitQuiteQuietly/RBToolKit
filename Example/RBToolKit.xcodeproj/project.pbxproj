@@ -25,6 +25,7 @@
 		717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54D020BED4BE00E4E815 /* ReactiveViewController.m */; };
 		717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DC20BFD9E300E4E815 /* BaseViewController.m */; };
 		717A54E020BFDA0800E4E815 /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DF20BFDA0800E4E815 /* QRViewController.m */; };
+		717A54E820BFF52800E4E815 /* QRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54E720BFF52800E4E815 /* QRScanViewController.m */; };
 		7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7189242120A9714100D1AF03 /* RBLockViewController.m */; };
 		71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
@@ -74,6 +75,8 @@
 		717A54DC20BFD9E300E4E815 /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		717A54DE20BFDA0800E4E815 /* QRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRViewController.h; sourceTree = "<group>"; };
 		717A54DF20BFDA0800E4E815 /* QRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRViewController.m; sourceTree = "<group>"; };
+		717A54E620BFF52800E4E815 /* QRScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRScanViewController.h; sourceTree = "<group>"; };
+		717A54E720BFF52800E4E815 /* QRScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRScanViewController.m; sourceTree = "<group>"; };
 		7189242020A9714100D1AF03 /* RBLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBLockViewController.h; sourceTree = "<group>"; };
 		7189242120A9714100D1AF03 /* RBLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBLockViewController.m; sourceTree = "<group>"; };
 		71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionButtonViewController.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 			children = (
 				717A54DE20BFDA0800E4E815 /* QRViewController.h */,
 				717A54DF20BFDA0800E4E815 /* QRViewController.m */,
+				717A54E620BFF52800E4E815 /* QRScanViewController.h */,
+				717A54E720BFF52800E4E815 /* QRScanViewController.m */,
 			);
 			name = QR;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 			files = (
 				7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */,
 				71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */,
+				717A54E820BFF52800E4E815 /* QRScanViewController.m in Sources */,
 				6003F59E195388D20070C39A /* RBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* RBViewController.m in Sources */,
 				717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */,

@@ -28,7 +28,7 @@ typedef void(^decision)(BOOL decision);
             if (process) {
                 process(eAuthorizeOptionCamera, decision);
             }
-            if (option & eAuthorizeOptionAlbum) {
+            if (option & eAuthorizeOptionAlbum_read || option & eAuthorizeOptionAlbum_read_write) {
                 [RB_Authorization aboutAlbum:option process:process];
             }
         }];
@@ -69,20 +69,37 @@ typedef void(^decision)(BOOL decision);
 
 + (void)aboutAlbum:(eAuthorizeOption)option process:(pass)process {
 
-    BOOL album = option & eAuthorizeOptionAlbum;
+    BOOL write = option & eAuthorizeOptionAlbum_read;
+    
+    if (@available(iOS 11_0, *)) {
+        ///ios 11  不再需要询问 读取 相册的权限
+        if (write) {
+            if (process) {
+                process(eAuthorizeOptionAlbum_read, YES);
+            }
+        }
+        
+        if (!(option & eAuthorizeOptionAlbum_read_write)) {
+            return;
+        }
+        
+    }
+    
+    
+    BOOL album = option & eAuthorizeOptionAlbum_read_write || option & eAuthorizeOptionAlbum_read;
 
     if (album) {
 
         [RB_Authorization checkAlbum:^(BOOL decision) {
             if (process) {
-                process(eAuthorizeOptionAlbum, decision);
+                process(eAuthorizeOptionAlbum_read_write, decision);
             }
         }];
 
     }
     else {
         if (process) {
-            process(eAuthorizeOptionAlbum, NO);
+            process(eAuthorizeOptionAlbum_read_write, NO);
         }
     }
 }
@@ -138,7 +155,6 @@ typedef void(^decision)(BOOL decision);
     }
     
 }
-
 
 
 @end
