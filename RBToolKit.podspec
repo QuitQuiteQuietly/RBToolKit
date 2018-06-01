@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RBToolKit'
-  s.version          = '0.2.0'
+  s.version          = '0.2.1'
   s.summary          = 'RBToolKit.'
 
   s.description      = <<-DESC

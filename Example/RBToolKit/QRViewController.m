@@ -34,7 +34,7 @@
 - (void)scan {
     
     QRScanViewController *vc = [QRScanViewController scan:nil album:^(UIBarButtonItem *item) {
-        item.title = @"412";
+        item.title = @"选择照片";
     }];
     
     [self.navigationController pushViewController:vc animated:YES];

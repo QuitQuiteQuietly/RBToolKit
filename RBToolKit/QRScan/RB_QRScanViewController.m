@@ -119,6 +119,12 @@
 }
 
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    [[RB_QRScan scan] sessionRun:YES];
+}
+
+
 
 
 - (void)authorizationFailed:(eAuthorizeOption)option {
@@ -164,6 +170,9 @@
 
 
 - (void)imagePick {
+    
+    [[RB_QRScan scan] sessionRun:NO];
+    
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;

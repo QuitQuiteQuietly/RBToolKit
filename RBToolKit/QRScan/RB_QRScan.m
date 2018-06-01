@@ -71,36 +71,8 @@ static RB_QRScan *_scan;
         }
     }
     
-    if (self.scanSomething) {
-        BOOL stop = NO;
-        self.scanSomething(result, &stop);
-    }
-    
-    
-}
+    [self doSomething:result];
 
-/// 返回一张不超过屏幕尺寸的 image
-+ (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image {
-    CGFloat imageWidth = image.size.width;
-    CGFloat imageHeight = image.size.height;
-    CGSize screen = [UIScreen mainScreen].bounds.size;
-    CGFloat screenWidth = screen.width;
-    CGFloat screenHeight = screen.height;
-    
-    if (imageWidth <= screenWidth && imageHeight <= screenHeight) {
-        return image;
-    }
-    
-    CGFloat max = MAX(imageWidth, imageHeight);
-    CGFloat scale = max / (screenHeight * 2.0);
-    
-    CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);
-    UIGraphicsBeginImageContext(size);
-    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
 }
 
 
@@ -169,20 +141,26 @@ static RB_QRScan *_scan;
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
     
+    NSString *msg = [metadataObjects.firstObject stringValue];
+    
+    [self doSomething:msg];
+}
+
+- (void)doSomething:(NSString *)result {
+    
     if (self.scanSomething) {
         
         BOOL stop = YES;
         
         [self sessionRun:NO];
         
-        NSString *msg = [metadataObjects.firstObject stringValue];
-        
-        self.scanSomething(msg, &stop);
+        self.scanSomething(result, &stop);
         
         if (!stop) {
             [self sessionRun:YES];
         }
     }
+    
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
@@ -220,5 +198,31 @@ static RB_QRScan *_scan;
     }
     return _flashOn;
 }
+
+
+/// 返回一张不超过屏幕尺寸的 image
++ (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image {
+    CGFloat imageWidth = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    CGSize screen = [UIScreen mainScreen].bounds.size;
+    CGFloat screenWidth = screen.width;
+    CGFloat screenHeight = screen.height;
+    
+    if (imageWidth <= screenWidth && imageHeight <= screenHeight) {
+        return image;
+    }
+    
+    CGFloat max = MAX(imageWidth, imageHeight);
+    CGFloat scale = max / (screenHeight * 2.0);
+    
+    CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 
 @end

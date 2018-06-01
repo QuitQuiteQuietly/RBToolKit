@@ -34,4 +34,6 @@ typedef void(^scanSomething)(NSString *result, BOOL *stop);
 /** 识别图片中的二维码 */
 @property (nonatomic, strong)UIImage *imageDiscernment;
 
+- (void)sessionRun:(BOOL)run;
+
 @end
