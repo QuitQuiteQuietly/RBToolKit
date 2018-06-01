@@ -23,7 +23,7 @@ TODO: Add long description of the pod here.
     end
 
     s.subspec 'Time' do |time|
-        time.source_files = 'RBToolKit/Time/*.{h,m}', 'RBToolKit/Time/**/*.{h,m}'
+        time.source_files = 'RBToolKit/Time/*.{h,m}', 'RBToolKit/Time/**/*.{h,m}', 'RBToolKit/InterFace/Category/NSString+SafeString.{h,m}'
     end
 
     s.subspec 'TableView' do |tableView|
