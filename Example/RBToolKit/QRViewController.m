@@ -8,7 +8,7 @@
 
 #import "QRViewController.h"
 
-#import <RBToolKit/QRGenerate.h>
+#import <RBToolKit/RB_QRGenerate.h>
 
 #import <RBToolKit/RB_QRScanViewController.h>
 
@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _qr_imageView.image = [QRGenerate qr_info:@"wzc5670594" width:CGRectGetWidth(_qr_imageView.frame)];
+    _qr_imageView.image = [RB_QRGenerate qr_info:@"wzc5670594" width:CGRectGetWidth(_qr_imageView.frame)];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"扫一扫"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
 

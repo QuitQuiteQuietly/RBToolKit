@@ -1,11 +1,11 @@
 //
-//  QRScanView.m
+//  RB_QRScanView.m
 //  Kiwi
 //
 //  Created by Ray on 2018/5/31.
 //
 
-#import "QRScanView.h"
+#import "RB_QRScanView.h"
 
 #import "ReactiveObjC.h"
 
@@ -22,7 +22,7 @@
 
 #define notice_label_Height 17.f
 
-@interface QRScanView ()
+@interface RB_QRScanView ()
 /**  */
 @property (nonatomic, strong)QRScanViewConfig *config;
 
@@ -42,10 +42,10 @@
 
 @end
 
-@implementation QRScanView
+@implementation RB_QRScanView
 
-+ (QRScanView *)frame:(CGRect)frame config:(QRScanViewConfig *)config {
-    QRScanView *v = [[QRScanView alloc]initWithFrame:frame];
++ (RB_QRScanView *)frame:(CGRect)frame config:(QRScanViewConfig *)config {
+    RB_QRScanView *v = [[RB_QRScanView alloc]initWithFrame:frame];
     v.config = config;
     return v;
 }

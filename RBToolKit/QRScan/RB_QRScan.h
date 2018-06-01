@@ -11,6 +11,9 @@
 
 @class RACSignal;
 
+
+typedef void(^scanSomething)(NSArray *data, BOOL *stop);
+
 @interface RB_QRScan : NSObject
 
 + (RB_QRScan *)scan;
@@ -23,5 +26,9 @@
 
 /** 重置 session */
 @property (nonatomic, strong)RACSignal *sessionStatus;
+
+
+/**  */
+@property (nonatomic, strong)scanSomething scanSomething;
 
 @end

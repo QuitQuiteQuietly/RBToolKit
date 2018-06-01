@@ -9,6 +9,7 @@
 
 #import "RB_QRScanConfig.h"
 
+#import "RB_QRScan.h"
 
 typedef RB_QRScanConfig *(^config)(RB_QRScanConfig *config);
 
@@ -16,6 +17,8 @@ typedef void(^manageItem)(UIBarButtonItem *item);
 
 @interface RB_QRScanViewController : UIViewController
 
+/** 扫描结果 */
+@property (nonatomic, strong)scanSomething scanSomething;
 
 + (RB_QRScanViewController *)scan:(config)config;
 

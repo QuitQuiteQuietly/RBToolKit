@@ -97,12 +97,33 @@ static RB_QRScan *_scan;
     }
     
     // 9、启动会话
-    [_session startRunning];
+    [self sessionRun:YES];
     
 }
 
+- (void)sessionRun:(BOOL)run {
+    if (run) {
+        [self.session startRunning];
+    }
+    else {
+        [self.session stopRunning];
+    }
+}
+
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
-    NSLog(@"%@", metadataObjects);
+    
+    if (self.scanSomething) {
+        
+        BOOL stop = YES;
+        
+        [self sessionRun:NO];
+        
+        self.scanSomething(metadataObjects, &stop);
+        
+        if (!stop) {
+            [self sessionRun:YES];
+        }
+    }
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
@@ -126,6 +147,7 @@ static RB_QRScan *_scan;
     [[_sessionStatus take:1] subscribeCompleted:^{
         @strongify(self)
         [self setSampleBuffer:NO];
+        [self sessionRun:NO];
     }];
     
 }

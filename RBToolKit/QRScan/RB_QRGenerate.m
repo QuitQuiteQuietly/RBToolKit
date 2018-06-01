@@ -1,13 +1,13 @@
 //
-//  QRGenerate.m
+//  RB_QRGenerate.m
 //  MJRefresh
 //
 //  Created by Ray on 2018/5/31.
 //
 
-#import "QRGenerate.h"
+#import "RB_QRGenerate.h"
 
-@implementation QRGenerate
+@implementation RB_QRGenerate
 
 + (UIImage *)qr_info:(NSString *)info width:(CGFloat)width {
     
@@ -22,7 +22,7 @@
     
     CIImage *image = [filter outputImage];
     
-    return [QRGenerate trans:image width:width];
+    return [RB_QRGenerate trans:image width:width];
 }
 
 

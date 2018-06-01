@@ -7,9 +7,7 @@
 
 #import "RB_QRScanViewController.h"
 
-#import "RB_QRScan.h"
-
-#import "QRScanView.h"
+#import "RB_QRScanView.h"
 
 #import "ReactiveObjC.h"
 
@@ -18,7 +16,7 @@
 @interface RB_QRScanViewController ()
 
 /**  */
-@property (nonatomic, strong)QRScanView *scanView;
+@property (nonatomic, strong)RB_QRScanView *scanView;
 
 
 /**  */
@@ -59,12 +57,7 @@
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    self.scanView = [QRScanView frame:self.view.bounds config:self.config.view];
-    
-    ///管理 手电筒
-    [[self.scanView.needFlash takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
-        [RB_Authorization flash:x.boolValue];
-    }];
+    self.scanView = [RB_QRScanView frame:self.view.bounds config:self.config.view];
     
     [self.view addSubview:self.scanView];
     
@@ -79,8 +72,11 @@
                 [self.view.layer insertSublayer:layer atIndex:0];
             }];
 
-            
+            ///页面销毁 终止session
             [RB_QRScan scan].sessionStatus = self.rac_willDeallocSignal;
+            
+            ///扫描到
+            [RB_QRScan scan].scanSomething = self.scanSomething;
             
         }
         
@@ -95,6 +91,11 @@
         self.navigationItem.rightBarButtonItem = item;
     }
 
+    ///管理 手电筒
+    [[self.scanView.needFlash takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNumber * _Nullable x) {
+        [RB_Authorization flash:x.boolValue];
+    }];
+    
     ///确认手电筒关闭
     [self.rac_willDeallocSignal subscribeCompleted:^{
         [RB_Authorization flash:NO];
