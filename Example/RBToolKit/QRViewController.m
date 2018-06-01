@@ -10,7 +10,7 @@
 
 #import <RBToolKit/RB_QRGenerate.h>
 
-#import <RBToolKit/RB_QRScanViewController.h>
+#import "QRScanViewController.h"
 
 @interface QRViewController ()
 
@@ -33,7 +33,7 @@
 
 - (void)scan {
     
-    RB_QRScanViewController *vc = [RB_QRScanViewController scan:nil album:^(UIBarButtonItem *item) {
+    QRScanViewController *vc = [QRScanViewController scan:nil album:^(UIBarButtonItem *item) {
         item.title = @"412";
     }];
     

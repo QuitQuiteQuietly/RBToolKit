@@ -12,7 +12,7 @@
 @class RACSignal;
 
 
-typedef void(^scanSomething)(NSArray *data, BOOL *stop);
+typedef void(^scanSomething)(NSString *result, BOOL *stop);
 
 @interface RB_QRScan : NSObject
 
@@ -30,5 +30,8 @@ typedef void(^scanSomething)(NSArray *data, BOOL *stop);
 
 /**  */
 @property (nonatomic, strong)scanSomething scanSomething;
+
+/** 识别图片中的二维码 */
+@property (nonatomic, strong)UIImage *imageDiscernment;
 
 @end

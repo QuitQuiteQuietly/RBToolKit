@@ -69,11 +69,11 @@ typedef void(^decision)(BOOL decision);
 
 + (void)aboutAlbum:(eAuthorizeOption)option process:(pass)process {
 
-    BOOL write = option & eAuthorizeOptionAlbum_read;
+    BOOL read = option & eAuthorizeOptionAlbum_read;
     
     if (@available(iOS 11_0, *)) {
         ///ios 11  不再需要询问 读取 相册的权限
-        if (write) {
+        if (read) {
             if (process) {
                 process(eAuthorizeOptionAlbum_read, YES);
             }

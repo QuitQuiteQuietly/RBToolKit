@@ -11,9 +11,7 @@
 
 #import "ReactiveObjC.h"
 
-#import "RB_Authorization.h"
-
-@interface RB_QRScanViewController ()
+@interface RB_QRScanViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 /**  */
 @property (nonatomic, strong)RB_QRScanView *scanView;
@@ -29,15 +27,15 @@
 
 @implementation RB_QRScanViewController
 
-+ (RB_QRScanViewController *)scan:(config)config album:(manageItem)album {
-    RB_QRScanViewController *vc = [RB_QRScanViewController scan:config];
++ (instancetype)scan:(config)config album:(manageItem)album {
+    RB_QRScanViewController *vc = [self scan:config];
     vc.manageBarItem = album;
     return vc;
 }
 
-+ (RB_QRScanViewController *)scan:(config)config {
++ (instancetype)scan:(config)config {
     
-    RB_QRScanViewController *vc = [RB_QRScanViewController new];
+    RB_QRScanViewController *vc = [self new];
     
     RB_QRScanConfig *normal = [RB_QRScanConfig config];
     
@@ -66,7 +64,7 @@
     [RB_Authorization authorize:^(eAuthorizeOption op, BOOL pass) {
         @strongify(self)
         
-        if (op == eAuthorizeOptionCamera && pass) {
+        if (pass) {
             ///如果权限允许 开启摄像头
             [[RB_QRScan scan] getReady:^(AVCaptureVideoPreviewLayer *layer) {
                 [self.view.layer insertSublayer:layer atIndex:0];
@@ -75,12 +73,19 @@
             ///页面销毁 终止session
             [RB_QRScan scan].sessionStatus = self.rac_willDeallocSignal;
             
-            ///扫描到
-            [RB_QRScan scan].scanSomething = self.scanSomething;
+        }
+        else {
+            
+            [self authorizationFailed:op];
             
         }
         
+        ///扫描到
+        [RB_QRScan scan].scanSomething = self.scanSomething;
+        
     } option:eAuthorizeOptionCamera];
+    
+    
     
     ///是否需要 图片扫描
     if (self.config.albumManage) {
@@ -103,18 +108,75 @@
     
 }
 
+
+///相册选择照片 完成
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    [RB_QRScan scan].imageDiscernment = info[UIImagePickerControllerOriginalImage];
+    
+}
+
+
+
+
+- (void)authorizationFailed:(eAuthorizeOption)option {
+
+    RACTupleUnpack(NSString *info, NSString *confirm) = [self authorizationFailedInfo:option];
+    
+    UIAlertController *alert = [self authFailAlert:info confirm:confirm];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (RACTuple *)authorizationFailedInfo:(eAuthorizeOption)option {
+    switch (option) {
+        case eAuthorizeOptionCamera:
+            return RACTuplePack(@"请在iPhone的“设置-隐私-相机”选项中，允许访问你的相机。", @"确认");
+        case eAuthorizeOptionAlbum_read:
+        case eAuthorizeOptionAlbum_read_write:
+            return RACTuplePack(@"请在iPhone的“设置-隐私-相册”选项中，允许访问你的相册。", @"确认");
+    }
+    
+}
+
 - (void)photoLibrary {
     
     [RB_Authorization authorize:^(eAuthorizeOption op, BOOL pass) {
 
-        NSLog(@"%d", pass);
-        if (!pass) {
-            self.navigationItem.rightBarButtonItem = nil;
+        if (pass) {
+            [self imagePick];
         }
+        else {
+            self.navigationItem.rightBarButtonItem = nil;
+            [self authorizationFailed:op];
+        }
+
         
     } option:eAuthorizeOptionAlbum_read];
     
 }
 
+
+
+
+
+- (void)imagePick {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+
+- (UIAlertController *)authFailAlert:(NSString *)info confirm:(NSString *)confirm {
+    
+    UIAlertController *authFailAlert = [UIAlertController alertControllerWithTitle:info message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [authFailAlert addAction:[UIAlertAction actionWithTitle:confirm style:UIAlertActionStyleDefault handler:nil]];
+    
+    return authFailAlert;
+}
 
 @end

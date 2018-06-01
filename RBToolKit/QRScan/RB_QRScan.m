@@ -47,6 +47,63 @@ static RB_QRScan *_scan;
     return _video_data_Output;
 }
 
+- (void)setImageDiscernment:(UIImage *)imageDiscernment {
+    
+    if (!imageDiscernment) { return; }
+    
+    // 对选取照片的处理，如果选取的图片尺寸过大，则压缩选取图片，否则不作处理
+    UIImage *image = [RB_QRScan SG_imageSizeWithScreenImage:imageDiscernment];
+    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
+    // 声明一个 CIDetector，并设定识别类型 CIDetectorTypeQRCode
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{CIDetectorAccuracy: CIDetectorAccuracyHigh}];
+    
+    // 取得识别结果
+    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
+    
+    NSString *result;
+    
+    if (features.count == 0) {
+        result = @"";
+    } else {
+        for (int index = 0; index < [features count]; index ++) {
+            CIQRCodeFeature *feature = [features objectAtIndex:index];
+            result = feature.messageString;
+        }
+    }
+    
+    if (self.scanSomething) {
+        BOOL stop = NO;
+        self.scanSomething(result, &stop);
+    }
+    
+    
+}
+
+/// 返回一张不超过屏幕尺寸的 image
++ (UIImage *)SG_imageSizeWithScreenImage:(UIImage *)image {
+    CGFloat imageWidth = image.size.width;
+    CGFloat imageHeight = image.size.height;
+    CGSize screen = [UIScreen mainScreen].bounds.size;
+    CGFloat screenWidth = screen.width;
+    CGFloat screenHeight = screen.height;
+    
+    if (imageWidth <= screenWidth && imageHeight <= screenHeight) {
+        return image;
+    }
+    
+    CGFloat max = MAX(imageWidth, imageHeight);
+    CGFloat scale = max / (screenHeight * 2.0);
+    
+    CGSize size = CGSizeMake(imageWidth / scale, imageHeight / scale);
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+
 - (void)getReady:(void (^)(AVCaptureVideoPreviewLayer *))layer {
     
     // 1、获取摄像设备
@@ -118,7 +175,9 @@ static RB_QRScan *_scan;
         
         [self sessionRun:NO];
         
-        self.scanSomething(metadataObjects, &stop);
+        NSString *msg = [metadataObjects.firstObject stringValue];
+        
+        self.scanSomething(msg, &stop);
         
         if (!stop) {
             [self sessionRun:YES];
