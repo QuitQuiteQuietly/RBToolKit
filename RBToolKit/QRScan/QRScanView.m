@@ -11,6 +11,8 @@
 
 #import "RB_QRScan.h"
 
+#import "RB_QRScanConfig.h"
+
 /** 扫描内容的 W 值 */
 #define scanBorderW 0.7 * self.frame.size.width
 /** 扫描内容的 x 值 */
@@ -265,19 +267,4 @@
 
 @end
 
-@implementation QRScanViewConfig
 
-+ (QRScanViewConfig *)config {
-    QRScanViewConfig *c = [QRScanViewConfig new];
-    c.lineWidth = 2;
-    c.lineColor = [UIColor whiteColor];
-    c.lineLength = 20;
-    c.maskBoxBoardWidth = .2;
-    c.maskBoxBoardColor = [UIColor whiteColor];
-    c.scanLine_display = YES;
-    c.flashNotice = [RACTuple tupleWithObjects:@"轻触照亮", @"轻触关闭", nil];
-    return c;
-}
-
-
-@end

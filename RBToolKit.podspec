@@ -49,6 +49,12 @@ TODO: Add long description of the pod here.
         qr.source_files = 'RBToolKit/QRScan/**/*'
         qr.dependency 'ReactiveObjC'
     end
+    
+    s.subspec 'Wallet_Package' do [wp]
+        wp.source_files = 'RBToolKit/FileManager/**/*', 'RBToolKit/QRScan/**/*', 'RBToolKit/InterFace/**/*', 'RBToolKit/TransitionButton/*.{h,m}', 'RBToolKit/Time/**/*', 'RBToolKit/TableView/RBTableView.{h,m}'
+        wp.dependency 'MJRefresh'
+        wp.dependency 'ReactiveObjC'
+        end
 
   s.ios.deployment_target = '8.0'
 

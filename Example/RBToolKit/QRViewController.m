@@ -33,7 +33,11 @@
 
 - (void)scan {
     
-    [self.navigationController pushViewController:[RB_QRScanViewController new] animated:YES];
+    RB_QRScanViewController *vc = [RB_QRScanViewController scan:nil album:^(UIBarButtonItem *item) {
+        item.title = @"412";
+    }];
+    
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
