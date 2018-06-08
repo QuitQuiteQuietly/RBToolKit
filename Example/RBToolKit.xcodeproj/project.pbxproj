@@ -21,6 +21,11 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		710C91C120C7C31900364A50 /* Card_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C020C7C31900364A50 /* Card_ViewController.m */; };
+		710C91C420C7C33000364A50 /* CardInfo_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C320C7C33000364A50 /* CardInfo_ViewController.m */; };
+		710C91C720C7CA3000364A50 /* CardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C620C7CA3000364A50 /* CardNaviViewController.m */; };
+		710C91CE20C7D24900364A50 /* AnimatorShowImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C920C7D24800364A50 /* AnimatorShowImage.m */; };
+		710C91CF20C7D24900364A50 /* AnimatorShowDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54D020BED4BE00E4E815 /* ReactiveViewController.m */; };
 		717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DC20BFD9E300E4E815 /* BaseViewController.m */; };
@@ -65,6 +70,17 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		63A1641FF2C11C92637572AB /* Pods_RBToolKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RBToolKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		710C91BF20C7C31900364A50 /* Card_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card_ViewController.h; sourceTree = "<group>"; };
+		710C91C020C7C31900364A50 /* Card_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Card_ViewController.m; sourceTree = "<group>"; };
+		710C91C220C7C33000364A50 /* CardInfo_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardInfo_ViewController.h; sourceTree = "<group>"; };
+		710C91C320C7C33000364A50 /* CardInfo_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardInfo_ViewController.m; sourceTree = "<group>"; };
+		710C91C520C7CA3000364A50 /* CardNaviViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardNaviViewController.h; sourceTree = "<group>"; };
+		710C91C620C7CA3000364A50 /* CardNaviViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardNaviViewController.m; sourceTree = "<group>"; };
+		710C91C920C7D24800364A50 /* AnimatorShowImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatorShowImage.m; sourceTree = "<group>"; };
+		710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatorShowDetail.m; sourceTree = "<group>"; };
+		710C91CB20C7D24800364A50 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		710C91CC20C7D24800364A50 /* AnimatorShowImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatorShowImage.h; sourceTree = "<group>"; };
+		710C91CD20C7D24800364A50 /* AnimatorShowDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatorShowDetail.h; sourceTree = "<group>"; };
 		71189FEC20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		71189FED20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		71189FEE20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -153,6 +169,7 @@
 		6003F593195388D20070C39A /* Example for RBToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				710C91BE20C7C2FB00364A50 /* CardTransVC */,
 				717A54E120BFDA0B00E4E815 /* QR */,
 				6003F59C195388D20070C39A /* RBAppDelegate.h */,
 				6003F59D195388D20070C39A /* RBAppDelegate.m */,
@@ -213,6 +230,32 @@
 				9F3E2EF8918350839DE2EB19 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		710C91BE20C7C2FB00364A50 /* CardTransVC */ = {
+			isa = PBXGroup;
+			children = (
+				710C91C820C7D24800364A50 /* Transition */,
+				710C91BF20C7C31900364A50 /* Card_ViewController.h */,
+				710C91C020C7C31900364A50 /* Card_ViewController.m */,
+				710C91C220C7C33000364A50 /* CardInfo_ViewController.h */,
+				710C91C320C7C33000364A50 /* CardInfo_ViewController.m */,
+				710C91C520C7CA3000364A50 /* CardNaviViewController.h */,
+				710C91C620C7CA3000364A50 /* CardNaviViewController.m */,
+			);
+			name = CardTransVC;
+			sourceTree = "<group>";
+		};
+		710C91C820C7D24800364A50 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				710C91C920C7D24800364A50 /* AnimatorShowImage.m */,
+				710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */,
+				710C91CB20C7D24800364A50 /* Constant.h */,
+				710C91CC20C7D24800364A50 /* AnimatorShowImage.h */,
+				710C91CD20C7D24800364A50 /* AnimatorShowDetail.h */,
+			);
+			path = Transition;
 			sourceTree = "<group>";
 		};
 		717A54E120BFDA0B00E4E815 /* QR */ = {
@@ -424,13 +467,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */,
+				710C91C420C7C33000364A50 /* CardInfo_ViewController.m in Sources */,
 				71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */,
 				717A550020C1591600E4E815 /* QRScanViewController.m in Sources */,
+				710C91CE20C7D24900364A50 /* AnimatorShowImage.m in Sources */,
 				6003F59E195388D20070C39A /* RBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* RBViewController.m in Sources */,
 				717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */,
+				710C91C120C7C31900364A50 /* Card_ViewController.m in Sources */,
 				717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */,
+				710C91CF20C7D24900364A50 /* AnimatorShowDetail.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				710C91C720C7CA3000364A50 /* CardNaviViewController.m in Sources */,
 				717A54E020BFDA0800E4E815 /* QRViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
