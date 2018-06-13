@@ -7,7 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^refreshBlock)(BOOL isHeader, NSInteger pageIndex);
+@class RBTableView;
+
+typedef void(^refresh)(BOOL header, NSInteger page, RBTableView *tableView);
 
 typedef NS_ENUM(NSUInteger, eTableViewBg) {
     eTableViewBgNoData,
@@ -17,18 +19,19 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
 @interface RBTableView : UITableView
 
 
-- (instancetype)initWithStyle:(UITableViewStyle)style refreshBlock:(refreshBlock)refreshBlock;
+- (instancetype)initWithStyle:(UITableViewStyle)style refresh:(refresh)refresh;
 
 ///内部拥有set方法，防止复写
-@property (nonatomic, readonly, copy)refreshBlock refresh;
+@property (nonatomic, readonly, copy)refresh refresh;
 
 
 /**
  当 拉动 tableview 时
  
- @param refreshBlock ""
+ @param refresh ""
  */
-- (void)rb_mj_refreshBlock:(refreshBlock)refreshBlock headerEnable:(BOOL)header footerEnable:(BOOL)footer;
+- (void)rb_mj_refresh:(refresh)refresh enableHeader:(BOOL)header footer:(BOOL)footer;
+
 
 /**
  结束刷新状态
@@ -39,10 +42,21 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
 - (void)endRefreshAndRequestSuccess:(BOOL)success
                      withNoMoreData:(BOOL)noMoreData
                             isEmpty:(BOOL)isEmpty;
-- (void)endRefreshWithNoMoreData;
 
-///首次请求--会将isHeader和pageIndex都置为0
+
+/**
+ 结束刷新
+
+ @param displayNoMoreData 是否显示已无更多数据
+ */
+- (void)endRefresh:(BOOL)displayNoMoreData;
+
+
+/** 首次请求--会将isHeader和pageIndex都置为0
+ *  startRefresh -- pullAnimate 默认 YES
+ */
 - (void)startRefresh;
+- (void)startRefresh:(BOOL)pullAnimate;
 
 ///当前的页数
 @property (nonatomic, readonly, assign)NSInteger currentPageIndex;

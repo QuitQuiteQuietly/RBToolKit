@@ -26,6 +26,7 @@
 		710C91C720C7CA3000364A50 /* CardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C620C7CA3000364A50 /* CardNaviViewController.m */; };
 		710C91CE20C7D24900364A50 /* AnimatorShowImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C920C7D24800364A50 /* AnimatorShowImage.m */; };
 		710C91CF20C7D24900364A50 /* AnimatorShowDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */; };
+		7143E29420D0FA0E00E950F2 /* RBTableViewExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7143E29320D0FA0E00E950F2 /* RBTableViewExampleVC.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54D020BED4BE00E4E815 /* ReactiveViewController.m */; };
 		717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DC20BFD9E300E4E815 /* BaseViewController.m */; };
@@ -84,6 +85,8 @@
 		71189FEC20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		71189FED20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		71189FEE20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		7143E29220D0FA0E00E950F2 /* RBTableViewExampleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBTableViewExampleVC.h; sourceTree = "<group>"; };
+		7143E29320D0FA0E00E950F2 /* RBTableViewExampleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBTableViewExampleVC.m; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		717A54CF20BED4BE00E4E815 /* ReactiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveViewController.h; sourceTree = "<group>"; };
 		717A54D020BED4BE00E4E815 /* ReactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveViewController.m; sourceTree = "<group>"; };
@@ -169,6 +172,7 @@
 		6003F593195388D20070C39A /* Example for RBToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				7143E29120D0F9EA00E950F2 /* TableView_Example */,
 				710C91BE20C7C2FB00364A50 /* CardTransVC */,
 				717A54E120BFDA0B00E4E815 /* QR */,
 				6003F59C195388D20070C39A /* RBAppDelegate.h */,
@@ -256,6 +260,15 @@
 				710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */,
 			);
 			path = Transition;
+			sourceTree = "<group>";
+		};
+		7143E29120D0F9EA00E950F2 /* TableView_Example */ = {
+			isa = PBXGroup;
+			children = (
+				7143E29220D0FA0E00E950F2 /* RBTableViewExampleVC.h */,
+				7143E29320D0FA0E00E950F2 /* RBTableViewExampleVC.m */,
+			);
+			name = TableView_Example;
 			sourceTree = "<group>";
 		};
 		717A54E120BFDA0B00E4E815 /* QR */ = {
@@ -467,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */,
+				7143E29420D0FA0E00E950F2 /* RBTableViewExampleVC.m in Sources */,
 				710C91C420C7C33000364A50 /* CardInfo_ViewController.m in Sources */,
 				71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */,
 				717A550020C1591600E4E815 /* QRScanViewController.m in Sources */,

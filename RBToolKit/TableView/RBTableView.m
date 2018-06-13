@@ -33,28 +33,37 @@
     _refreshHeaderEnable = YES;
 }
 
-- (instancetype)initWithStyle:(UITableViewStyle)style refreshBlock:(void (^)(BOOL, NSInteger))refreshBlock {
+- (instancetype)initWithStyle:(UITableViewStyle)style refresh:(refresh)refresh {
     self = [super initWithFrame:CGRectZero style:style];
     if (self) {
-        _refresh = refreshBlock;
-        _refreshFooterEnable = YES;
-        _refreshHeaderEnable = YES;
+        self.refresh = refresh;
+        self.refreshFooterEnable = YES;
+        self.refreshHeaderEnable = YES;
         [self setupMJRefresh];
     }
     return self;
 }
 
 - (void)startRefresh {
+    [self startRefresh:YES];
+}
+
+- (void)startRefresh:(BOOL)pullAnimate {
     if (self.refresh) {
+        
         self.refreshIndex = 0;
-        self.refresh(YES, self.refreshIndex);
+        
+        if (!pullAnimate) {
+            self.refresh(YES, self.refreshIndex, self);
+        }
+        else {
+            if (self.refreshHeaderEnable) {
+                [self.mj_header beginRefreshing];
+            }
+        }
     }
 }
 
-//- (void)endRefreshAndRequestSuccess:(BOOL)success lastCount:(NSInteger)noMoreData displayNoData:(NSInteger)hidden {
-//    self.backgroundView = (hidden > 0) ? nil : self.noMoreDataView;
-//    [self endRefreshAndRequestSuccess:success withNoMoreData:(noMoreData < PageSize.integerValue)];
-//}
 
 - (void)endRefreshAndRequestSuccess:(BOOL)success withNoMoreData:(BOOL)noMoreData isEmpty:(BOOL)isEmpty {
     
@@ -64,12 +73,7 @@
         self.refreshIndex ++;
     }
     
-    if (noMoreData) {
-        [self endRefreshWithNoMoreData];
-    }
-    else {
-        [self endRefresh];
-    }
+    [self endRefresh:noMoreData];
     
     [self setBackGroundViewWithNetwork:success isEmpty:isEmpty];
     
@@ -84,34 +88,42 @@
     self.backgroundView = isEmpty ? self.noMoreDataView : nil;
 }
 
-- (void)endRefresh {
-    [self headEndFresh];
+- (void)endRefresh:(BOOL)displayNoMoreData {
+    [self header_end_refresh];
+    [self footer_end_refresh:displayNoMoreData];
+}
+
+- (void)footer_end_refresh:(BOOL)displayNoMoreData {
     if (self.mj_footer) {
-        [self.mj_footer  endRefreshing];
+        if (displayNoMoreData) {
+            [self.mj_footer  endRefreshingWithNoMoreData];
+            return;
+        }
+        [self.mj_footer endRefreshing];
     }
 }
 
-- (void)headEndFresh {
+- (void)header_end_refresh {
     if (self.mj_header) {
         [self.mj_header endRefreshing];
     }
 }
 
-- (void)endRefreshWithNoMoreData {
-    [self headEndFresh];
-    if (self.mj_footer) {
-        [self.mj_footer  endRefreshingWithNoMoreData];
-    }
-}
-
-- (void)rb_mj_refreshBlock:(void (^)(BOOL, NSInteger))refreshBlock headerEnable:(BOOL)header footerEnable:(BOOL)footer {
-    _refresh = refreshBlock;
+- (void)rb_mj_refresh:(refresh)refresh enableHeader:(BOOL)header footer:(BOOL)footer {
+    _refresh = refresh;
     _refreshHeaderEnable = header;
     _refreshFooterEnable = footer;
     [self setupMJRefresh];
 }
 
 - (void)setupMJRefresh {
+    
+    
+    if (UITableViewStylePlain == self.style) {
+        self.tableFooterView = [UIView new];
+    }
+    
+    
     @weakify(self)
     if (!self.mj_header && _refreshHeaderEnable) {
         self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -123,7 +135,7 @@
             
             if (self.refresh) {
                 self.refreshIndex = 0;
-                self.refresh(YES, self.refreshIndex);
+                self.refresh(YES, self.refreshIndex, self);
             }
         }];
     }
@@ -141,7 +153,7 @@
             }
             
             if (self.refresh) {
-                self.refresh(NO, self.refreshIndex);
+                self.refresh(NO, self.refreshIndex, self);
             }
         }];
     }
@@ -177,7 +189,7 @@
 }
 
 
-- (void)setRefresh:(refreshBlock)refresh {}
+- (void)setRefresh:(refresh)refresh {}
 
 - (UIImageView *)noMoreDataView {
     if (!_noMoreDataView) {
