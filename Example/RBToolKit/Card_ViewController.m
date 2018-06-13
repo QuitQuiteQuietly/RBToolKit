@@ -55,17 +55,17 @@
         animator.viewYFrom = _imageTappedY;
         return animator;
     }
-    else if (operation == UINavigationControllerOperationPop) {
-        AnimatorShowImage *animator = [[AnimatorShowImage alloc] init];
-        NSLog(@"%@", animator);
-        animator.isClosed = NO;
-        animator.viewYTo = _imageTappedY;
-        animator.viewToTransition = _viewToTransition;
-        return animator;
-    }
-    else {
-        return nil;
-    }
+//    else if (operation == UINavigationControllerOperationPop) {
+//        AnimatorShowImage *animator = [[AnimatorShowImage alloc] init];
+//        NSLog(@"%@", animator);
+//        animator.isClosed = NO;
+//        animator.viewYTo = _imageTappedY;
+//        animator.viewToTransition = _viewToTransition;
+//        return animator;
+//    }
+//    else {
+        return [AnimatorShowDetail new];
+//    }
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     _destinationVC = segue.destinationViewController;

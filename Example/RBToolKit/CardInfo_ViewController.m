@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [UIView animateWithDuration:1 animations:^{
-        _statusHidden = YES;
+        _statusHidden = NO;
         [self setNeedsStatusBarAppearanceUpdate];
     }];
     
