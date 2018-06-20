@@ -35,7 +35,7 @@
 
 - (IBAction)transition:(UIButton *)sender {
     
-    [sender start:nil];
+    [sender animate:YES];
     
 }
 
@@ -66,7 +66,7 @@
 - (IBAction)stop:(UIButton *)sender {
     
     for (UIButton *b in _tButtons) {
-        [b stop];
+        [b animate:NO];
     }
     
 }

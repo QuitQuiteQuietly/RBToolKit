@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _qr_imageView.image = [RB_QRGenerate qr_info:@"RBToolKit" width:CGRectGetWidth(_qr_imageView.frame)];
+    _qr_imageView.image = [RB_QRGenerate qr_info:@"itms-services://?action=download-manifest&url=https://test2.6x.com/manifest.plist" width:CGRectGetWidth(_qr_imageView.frame)];
     
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"扫一扫"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
 
@@ -36,6 +36,8 @@
     QRScanViewController *vc = [QRScanViewController scan:nil album:^(UIBarButtonItem *item) {
         item.title = @"选择照片";
     }];
+    
+    vc.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:vc animated:YES];
     

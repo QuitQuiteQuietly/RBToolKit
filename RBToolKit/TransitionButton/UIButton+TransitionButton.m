@@ -85,13 +85,31 @@ static void *indicating_key = @"indicating";
 
 static void *indicator = @"indicator";
 
+static void *start_key = @"start_key";
 
 @implementation UIButton (TransitionButton)
 
-- (void)start {
-    
-    [self start:nil];
-    
+- (void)animate:(BOOL)start {
+    self.start = start;
+//    if (start) {
+//        [self start:nil];
+//    }
+//    else {
+//        [self stop];
+//    }
+}
+
+- (void)setStart:(BOOL)start {
+    objc_setAssociatedObject(self, &start_key, @(start), OBJC_ASSOCIATION_ASSIGN);
+    if (start) {
+        [self start:nil];
+    }
+    else {
+        [self stop];
+    }
+}
+- (BOOL)start {
+   return [objc_getAssociatedObject(self, &start_key) boolValue];
 }
 
 - (void)start:(void (^)(TransitionConfig *))config {

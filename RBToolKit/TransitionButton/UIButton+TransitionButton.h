@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 
 #import "TransitionConfig.h"
+
 /**
  
  * Inspire by AladinWay/TransitionButton
@@ -15,16 +16,15 @@
  * https://github.com/AladinWay/TransitionButton
  
  */
-
-
-
 @interface UIButton (TransitionButton)
 
-- (void)start;
 
+///开始动画
+- (void)animate:(BOOL)start;
 
 - (void)start:(void (^)(TransitionConfig *config))config;
 
-- (void)stop;
+/** 是否开始 */
+@property (nonatomic, assign)BOOL start;
 
 @end

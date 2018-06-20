@@ -346,7 +346,7 @@
 				ORGANIZATIONNAME = wzc5670594;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = 62ERJYFK4D;
+						DevelopmentTeam = S7YAAK4XAE;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -648,7 +648,7 @@
 			baseConfigurationReference = F0F7C6BEEF1B4B82359F60B4 /* Pods-RBToolKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62ERJYFK4D;
+				DEVELOPMENT_TEAM = S7YAAK4XAE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RBToolKit/RBToolKit-Prefix.pch";
 				INFOPLIST_FILE = "RBToolKit/RBToolKit-Info.plist";
@@ -665,7 +665,7 @@
 			baseConfigurationReference = B3C79447BE2BB2405455B032 /* Pods-RBToolKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 62ERJYFK4D;
+				DEVELOPMENT_TEAM = S7YAAK4XAE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RBToolKit/RBToolKit-Prefix.pch";
 				INFOPLIST_FILE = "RBToolKit/RBToolKit-Info.plist";
