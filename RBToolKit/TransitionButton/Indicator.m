@@ -9,7 +9,7 @@
 
 @implementation Indicator
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame color:(UIColor *)color {
     
     self = [super init];
     
@@ -20,7 +20,7 @@
         self.hidden = YES;
         
         self.fillColor = nil;
-        self.strokeColor = [UIColor whiteColor].CGColor;
+        self.strokeColor = color.CGColor;
         self.lineWidth = 1;
         
         self.strokeEnd = 0.4;

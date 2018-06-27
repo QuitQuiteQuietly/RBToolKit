@@ -29,6 +29,7 @@ static void *cache_Title = @"cacheTitle";
 static void *cache_Corner = @"cache_Corner";
 static void *config_key = @"config_tran";
 static void *indicating_key = @"indicating";
+static void *delay_key = @"delay_key";
 
 @interface UIButton (CacheOrigin)
 
@@ -46,6 +47,8 @@ static void *indicating_key = @"indicating";
 
 /**  */
 @property (nonatomic, assign)BOOL indicating;
+
+@property (nonatomic, assign)NSInteger delay;
 
 @end
 
@@ -65,6 +68,9 @@ static void *indicating_key = @"indicating";
 - (void)setConfig:(TransitionConfig *)config {
     objc_setAssociatedObject(self, &config_key, config, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+- (void)setDelay:(NSInteger)delay {
+    objc_setAssociatedObject(self, &delay_key, @(delay), OBJC_ASSOCIATION_ASSIGN);
+}
 - (TransitionConfig *)config {
    return objc_getAssociatedObject(self, &config_key);
 }
@@ -80,6 +86,9 @@ static void *indicating_key = @"indicating";
 - (CGFloat)cacheCorner {
     return [objc_getAssociatedObject(self, &cache_Corner) floatValue];
 }
+- (NSInteger)delay {
+    return [objc_getAssociatedObject(self, &delay_key) integerValue];
+}
 
 @end
 
@@ -91,12 +100,11 @@ static void *start_key = @"start_key";
 
 - (void)animate:(BOOL)start {
     self.start = start;
-//    if (start) {
-//        [self start:nil];
-//    }
-//    else {
-//        [self stop];
-//    }
+}
+
+- (void)animate:(BOOL)start stop_delay:(NSInteger)delay {
+    [self animate:start];
+    self.delay = delay;
 }
 
 - (void)setStart:(BOOL)start {
@@ -152,6 +160,9 @@ static void *start_key = @"start_key";
         self.cacheCorner = self.layer.cornerRadius;
 
         [self setTitle:@"" forState:UIControlStateNormal];
+        if (self.cacheImage) {
+            [self setImage:nil forState:UIControlStateNormal];
+        }
         
     }
     else {
@@ -168,6 +179,19 @@ static void *start_key = @"start_key";
         return;
     }
     
+    if (self.delay) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self do_stop];
+        });
+    }
+    else {
+        [self do_stop];
+    }
+    
+    
+}
+
+- (void)do_stop {
     self.indicating = NO;
     
     self.userInteractionEnabled = YES;
@@ -175,7 +199,7 @@ static void *start_key = @"start_key";
     [self indicatorStart:NO];
     
     switch (self.config.style.style) {
-
+            
         case eTransitionTypeNormal:
             break;
         case eTransitionTypeShrik:
@@ -184,7 +208,7 @@ static void *start_key = @"start_key";
     }
     
     switch (self.config.afterDone) {
-
+            
         case eTransitionDoneNormal:
             break;
         case eTransitionDoneExpand:
@@ -259,7 +283,7 @@ static void *start_key = @"start_key";
     
     if (!ind) {
         
-        ind = [[Indicator alloc]initWithFrame:self.frame];
+        ind = [[Indicator alloc]initWithFrame:self.frame color:[self titleColorForState:UIControlStateNormal]];
         
         objc_setAssociatedObject(self, &indicator, ind, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         

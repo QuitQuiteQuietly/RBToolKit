@@ -22,6 +22,8 @@
 ///开始动画
 - (void)animate:(BOOL)start;
 
+- (void)animate:(BOOL)start stop_delay:(NSInteger)delay;
+
 - (void)start:(void (^)(TransitionConfig *config))config;
 
 /** 是否开始 */

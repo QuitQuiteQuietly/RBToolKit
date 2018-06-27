@@ -15,6 +15,6 @@
 ///结束
 - (void)stop;
 
-- (instancetype)initWithFrame:(CGRect)frame;
+- (instancetype)initWithFrame:(CGRect)frame color:(UIColor *)color;
 
 @end

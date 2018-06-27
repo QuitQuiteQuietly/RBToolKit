@@ -35,7 +35,7 @@
 
 - (IBAction)transition:(UIButton *)sender {
     
-    [sender animate:YES];
+    [sender animate:YES stop_delay:2];
     
 }
 
