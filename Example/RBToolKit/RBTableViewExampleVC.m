@@ -15,6 +15,9 @@
 /**  */
 @property (nonatomic, weak)IBOutlet RBTableView *tableView;
 
+/**  */
+@property (nonatomic, strong)NSMutableArray *array;
+
 @end
 
 @implementation RBTableViewExampleVC
@@ -26,34 +29,46 @@
     
     [self.tableView rb_mj_refresh:^(BOOL header, NSInteger page, RBTableView *tableView) {
      
+        if (header) {
+            [self.array removeAllObjects];
+        }
+        
+        [self.array addObjectsFromArray:@[@1, @2, @3, @4, @5]];
+        
         NSLog(@"开始刷新 %ld --- %@", page, header ? @"首页" : @"非首页");
      
-        [tableView endRefresh:YES];
+        [tableView endRefreshAndRequestSuccess:YES withNoMoreData:NO isEmpty:NO];
         
-    } enableHeader:YES footer:YES];
+    }].enable(eRBTV_DirHeader | eRBTV_DirFooter).take(eRBTV_DirFooter, 2);
     
     
     [self.tableView startRefresh];
     
 }
 
-
+- (NSMutableArray *)array {
+    if (!_array) {
+        _array = [NSMutableArray array];
+    }
+    return _array;
+}
 
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[UITableViewCell description] forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[UITableViewCell description]];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:[UITableViewCell description]];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    cell.detailTextLabel.text = self.array[indexPath.row];
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.array.count;
 }
 
 

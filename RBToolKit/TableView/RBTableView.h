@@ -7,14 +7,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class RBTableView;
-
-typedef void(^refresh)(BOOL header, NSInteger page, RBTableView *tableView);
+typedef NS_OPTIONS(NSUInteger, eRBTV_Dir) {
+    eRBTV_DirHeader = 1 << 0,
+    eRBTV_DirFooter = 1 << 1
+};
 
 typedef NS_ENUM(NSUInteger, eTableViewBg) {
     eTableViewBgNoData,
     eTableViewBgNetGoesWrong
 };
+
+@class RBTableView;
+typedef void(^refresh)(BOOL header, NSInteger page, RBTableView *tableView);
+
 
 @interface RBTableView : UITableView
 
@@ -30,7 +35,11 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
  
  @param refresh ""
  */
-- (void)rb_mj_refresh:(refresh)refresh enableHeader:(BOOL)header footer:(BOOL)footer;
+- (RBTableView *)rb_mj_refresh:(refresh)refresh;
+- (void)rb_mj_refresh:(refresh)refresh enable:(eRBTV_Dir)dir;
+- (RBTableView *(^)(eRBTV_Dir dir))enable;
+//- (void)rb_mj_refresh:(refresh)refresh enableHeader:(BOOL)header footer:(BOOL)footer;
+
 
 
 /**
@@ -52,13 +61,14 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
 - (void)endRefresh:(BOOL)displayNoMoreData;
 
 
-/** 首次请求--会将isHeader和pageIndex都置为0
+/**
+ *  首次请求--会将isHeader和pageIndex都置为0
  *  startRefresh -- pullAnimate 默认 YES
- */
+ **/
 - (void)startRefresh;
 - (void)startRefresh:(BOOL)pullAnimate;
 
-///当前的页数
+/** 当前的页数 */
 @property (nonatomic, readonly, assign)NSInteger currentPageIndex;
 
 
@@ -82,4 +92,13 @@ typedef NS_ENUM(NSUInteger, eTableViewBg) {
                                                   image:(UIImage *)image
                                             imageOffset:(CGFloat)offset
                                                  bgType:(eTableViewBg)bgType;
+@end
+
+
+
+
+@interface RBTableView (Takes)
+
+- (RBTableView *(^)(NSInteger times, eRBTV_Dir direction))take;
+
 @end

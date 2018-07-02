@@ -10,7 +10,15 @@
 
 #import <ReactiveObjC/ReactiveObjC.h>
 
+#import "RBText.h"
+
 @interface ReactiveViewController ()
+
+/**  */
+@property (nonatomic, strong)RACMulticastConnection *c;
+
+/**  */
+@property (nonatomic, strong)RACSignal *gg;
 
 @end
 
@@ -18,15 +26,95 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [self racMultiConnect];
 //    [self sequence];
     
 //    [self racCommand];
     
 //    [self racConcat];
     
-    [self racCombiLatest];
+//    [self racCombiLatest];
     
+//    [self racGroup];
+    
+//    RACSignal *startWith = [[RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+//        [subscriber sendNext:@"44"];
+//
+//        [subscriber sendNext:@"445"];
+//
+//        [subscriber sendNext:@"446"];
+//        [subscriber sendCompleted];
+//        return nil;
+//    }] startWith:@4];
+//
+//
+//    [startWith subscribeNext:^(id  _Nullable x) {
+//        NSLog(@"%@", x);
+    //    }];
+    
+    
+}
+
+- (void)racMultiConnect {
+    
+    self.gg = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        [subscriber sendNext:@1];
+        dispatch_queue_t t = dispatch_queue_create("4", DISPATCH_QUEUE_PRIORITY_DEFAULT);
+        dispatch_async(t, ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [subscriber sendNext:@4];
+                [subscriber sendNext:@6];
+                [subscriber sendCompleted];
+            });
+        });
+        
+        return nil;
+    }];
+    
+    RACMulticastConnection *c = [self.gg publish];
+    
+    self.c = c;
+    [c.signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"1-----%@", x);
+    }];
+    [c connect];
+    
+    [c.signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"%@", x);
+    }];
+    
+    [c connect];
+    
+    
+}
+
+- (void)racGroup {
+    RACSignal *signalA = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber)
+                          {
+                              [subscriber sendNext:@1];
+                              [subscriber sendNext:@2];
+                              [subscriber sendNext:@3];
+                              [subscriber sendNext:@4];
+                              [subscriber sendNext:@5];
+                              [subscriber sendCompleted];
+                              return [RACDisposable disposableWithBlock:^{
+                                  NSLog(@"signal dispose");
+                              }];
+                          }];
+    
+    RACSignal *signalGroup = [signalA groupBy:^id<NSCopying>(NSNumber *object) {
+        return object.integerValue > 3 ? @"good" : @"bad";
+    } transform:^id(NSNumber * object) {
+        return @(object.integerValue * 10);
+    }];
+    
+    [[[signalGroup filter:^BOOL(RACGroupedSignal *value) {
+        return [(NSString *)value.key isEqualToString:@"good"];
+    }] flatten]subscribeNext:^(id x) {
+        NSLog(@"subscribeNext: %@", x);
+    }];
+
 }
 
 - (void)sequence {

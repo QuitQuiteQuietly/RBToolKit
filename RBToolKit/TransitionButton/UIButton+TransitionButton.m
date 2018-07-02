@@ -175,10 +175,6 @@ static void *start_key = @"start_key";
 
 - (void)stop {
     
-    if (!self.indicating) {
-        return;
-    }
-    
     if (self.delay) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self do_stop];
@@ -192,6 +188,11 @@ static void *start_key = @"start_key";
 }
 
 - (void)do_stop {
+    
+    if (!self.indicating) {
+        return;
+    }
+    
     self.indicating = NO;
     
     self.userInteractionEnabled = YES;

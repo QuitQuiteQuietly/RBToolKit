@@ -23,6 +23,12 @@
 ///refreshFooter是否可用 default : YES
 @property (nonatomic, readwrite, assign)BOOL refreshFooterEnable;
 
+/** 响应几次 */
+@property (nonatomic, strong)RACTwoTuple <NSNumber *, NSNumber *>*headerTakes;
+@property (nonatomic, strong)RACTwoTuple <NSNumber *, NSNumber *>*footerTakes;
+/** 最近一次的刷新 是什么位置 */
+@property (nonatomic, assign)eRBTV_Dir latest_refresh;
+
 @end
 
 @implementation RBTableView
@@ -64,19 +70,69 @@
     }
 }
 
+- (void)trigger_refresh:(eRBTV_Dir)dir {
+    
+    if (!self.refresh) { return; }
+    
+    self.latest_refresh = dir;
+    
+    self.refresh(dir & eRBTV_DirHeader, self.refreshIndex, self);
+}
+
+- (void)setLatest_refresh:(eRBTV_Dir)latest_refresh {
+    _latest_refresh = latest_refresh;
+    ///如果是头。置零
+    if (_latest_refresh & eRBTV_DirHeader) { self.refreshIndex = 0; }
+}
+
 
 - (void)endRefreshAndRequestSuccess:(BOOL)success withNoMoreData:(BOOL)noMoreData isEmpty:(BOOL)isEmpty {
     
     [self reloadData];
     
-    if (success && !noMoreData) {
-        self.refreshIndex ++;
+    if (success) {
+        if (!noMoreData) { self.refreshIndex ++; }
+        ///如果成功 是否需要出触发takes
+        [self trigger_takes];
     }
-    
+
     [self endRefresh:noMoreData];
     
     [self setBackGroundViewWithNetwork:success isEmpty:isEmpty];
     
+}
+
+- (void)trigger_takes {
+
+    if (self.latest_refresh & eRBTV_DirHeader) {
+        if (!self.headerTakes) { return; }
+        RACTupleUnpack(NSNumber *con, RACTwoTuple *info) = [self continueTakes:self.headerTakes];
+        self.refreshHeaderEnable = con.boolValue;
+        self.headerTakes = info;
+    }
+    else if (self.latest_refresh & eRBTV_DirFooter) {
+        if (!self.footerTakes) { return; }
+        RACTupleUnpack(NSNumber *con, RACTwoTuple *info) = [self continueTakes:self.footerTakes];
+        self.refreshFooterEnable = con.boolValue;
+        self.footerTakes = info;
+    }
+    
+}
+
+- (RACTwoTuple <NSNumber *, RACTwoTuple *>*)continueTakes:(RACTwoTuple <NSNumber *, NSNumber *> *)package {
+    BOOL take = package.first.boolValue;
+    
+    NSInteger times = package.second.integerValue;
+    times --;
+    
+    BOOL continueTakes = take && times > 0;
+    if (!continueTakes) {
+        package = nil;
+    }
+    else {
+        package = [RACTwoTuple tupleWithObjectsFromArray:@[@(take), @(times)]];
+    }
+    return [RACTwoTuple tupleWithObjectsFromArray:@[@(continueTakes), package] convertNullsToNils:YES];
 }
 
 - (void)setBackGroundViewWithNetwork:(BOOL)success isEmpty:(BOOL)isEmpty {
@@ -116,6 +172,29 @@
     [self setupMJRefresh];
 }
 
+- (void)rb_mj_refresh:(refresh)refresh enable:(eRBTV_Dir)dir {
+    [self rb_mj_refresh:refresh enableHeader:(dir & eRBTV_DirHeader) footer:(dir & eRBTV_DirFooter)];
+}
+
+- (RBTableView *)rb_mj_refresh:(refresh)refresh {
+    [self rb_mj_refresh:refresh enableHeader:YES footer:YES];
+    return self;
+}
+
+- (RBTableView *(^)(eRBTV_Dir))enable {
+    return ^RBTableView *(eRBTV_Dir dir) {
+      
+        if (dir & eRBTV_DirHeader) {
+            self.refreshHeaderEnable = YES;
+        }
+        if (dir & eRBTV_DirFooter) {
+            self.refreshFooterEnable = YES;
+        }
+        
+        return self;
+    };
+}
+
 - (void)setupMJRefresh {
     
     
@@ -132,11 +211,7 @@
             if (self.mj_footer && (self.mj_footer.state == MJRefreshStateRefreshing)) {
                 return;
             }
-            
-            if (self.refresh) {
-                self.refreshIndex = 0;
-                self.refresh(YES, self.refreshIndex, self);
-            }
+            [self trigger_refresh:eRBTV_DirHeader];
         }];
     }
     if (!self.mj_footer && _refreshFooterEnable) {
@@ -151,10 +226,7 @@
                 [self.mj_footer endRefreshing];
                 return;
             }
-            
-            if (self.refresh) {
-                self.refresh(NO, self.refreshIndex, self);
-            }
+            [self trigger_refresh:eRBTV_DirFooter];
         }];
     }
 }
@@ -259,6 +331,26 @@
     
     
     return imageView;
+}
+
+@end
+
+
+@implementation RBTableView (Takes)
+
+- (RBTableView *(^)(NSInteger, eRBTV_Dir))take {
+    return ^RBTableView *(NSInteger times, eRBTV_Dir dir) {
+        
+        if (dir & eRBTV_DirHeader) {
+            self.headerTakes = [RACTwoTuple tupleWithObjectsFromArray:@[@(YES), @(times)]];
+        }
+        if (dir & eRBTV_DirFooter) {
+            self.footerTakes = [RACTwoTuple tupleWithObjectsFromArray:@[@(YES), @(times)]];
+        }
+      
+        return self;
+        
+    };
 }
 
 @end
