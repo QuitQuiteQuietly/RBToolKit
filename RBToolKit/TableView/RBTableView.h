@@ -101,6 +101,6 @@ typedef void(^refresh)(BOOL header, NSInteger page, RBTableView *tableView);
 
 - (__kindof RBTableView *(^)(NSInteger times, eRBTV_Dir direction))take;
 
-//- (__kindof RBTableView *(^)(NSInteger times, BOOL resetAble, eRBTV_Dir direction))takeWithReset;
+- (__kindof RBTableView *(^)(NSInteger times, BOOL resetAble, eRBTV_Dir direction))takeWithReset;
 
 @end

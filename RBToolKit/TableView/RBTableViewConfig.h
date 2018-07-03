@@ -28,7 +28,7 @@
  @param resetAble 是否可以被重置 (+ (FreshTakes *)take:(NSInteger)take;)默认reset为 YES
  @return 计数器
  */
-//+ (FreshTakes *)take:(NSInteger)take resetAble:(BOOL)resetAble;
++ (FreshTakes *)take:(NSInteger)take resetAble:(BOOL)resetAble;
 
 /** 最大take */
 @property (nonatomic, assign)NSInteger maxTakes;
@@ -51,7 +51,27 @@
 - (BOOL)do_take;
 
 ///重置计数器
-- (void)reset;
+- (BOOL)reset;
+
+@end
+
+
+
+
+
+@interface RB_Refresh <__covariant Refresh> : NSObject
+
+typedef void(^delay)(Refresh refresh);
+typedef void(^disable)(BOOL disable, Refresh refresh);
+
++ (RB_Refresh *)refresh:(Refresh)refresh delay:(delay)delay disable:(disable)disable;
+/**  */
+@property (nonatomic, assign)BOOL enable;
+
+/**  */
+@property (nonatomic, strong)Refresh refresh;
+
+- (void)trigger;
 
 @end
 

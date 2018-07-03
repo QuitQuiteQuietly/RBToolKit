@@ -17,17 +17,12 @@
 @property (nonatomic, readwrite, assign)NSInteger refreshIndex;
 
 /**  */
-//@property (nonatomic, strong)MJRefreshNormalHeader *rb_header;
-//@property (nonatomic, strong)MJRefreshFooter *footer;
+@property (nonatomic, strong)RB_Refresh <MJRefreshNormalHeader *> *rb_header;
+@property (nonatomic, strong)RB_Refresh <MJRefreshBackNormalFooter *> *rb_footer;
 
 /**  */
 @property (nonatomic, readwrite, strong)UIImageView *noMoreDataView;
 @property (nonatomic, readwrite, strong)UIImageView *networkWrongView;
-
-///refreshHeader是否可用 default : YES
-@property (nonatomic, readwrite, assign)BOOL refreshHeaderEnable;
-///refreshFooter是否可用 default : YES
-@property (nonatomic, readwrite, assign)BOOL refreshFooterEnable;
 
 /** 响应几次 */
 @property (nonatomic, strong)FreshTakes *headerTakes;
@@ -41,19 +36,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _refreshFooterEnable = YES;
-    _refreshHeaderEnable = YES;
+    [self allAvailableHeader:NO :NO];
 }
 
 - (instancetype)initWithStyle:(UITableViewStyle)style refresh:(refresh)refresh {
     self = [super initWithFrame:CGRectZero style:style];
     if (self) {
         self.refresh = refresh;
-        self.refreshFooterEnable = YES;
-        self.refreshHeaderEnable = YES;
+        [self allAvailableHeader:YES :YES];
         [self setupMJRefresh];
     }
     return self;
+}
+
+- (void)allAvailableHeader:(BOOL)h :(BOOL)f {
+    self.rb_header.enable = h;
+    self.rb_footer.enable = f;
 }
 
 - (void)startRefresh {
@@ -69,9 +67,7 @@
             self.refresh(YES, self.refreshIndex, self);
         }
         else {
-            if (self.refreshHeaderEnable) {
-                [self.mj_header beginRefreshing];
-            }
+            [self.rb_header trigger];
         }
     }
 }
@@ -98,11 +94,15 @@
     
     if (success) {
         if (!noMoreData) { self.refreshIndex ++; }
-        ///如果成功 是否需要出触发takes
-        [self trigger_takes];
     }
 
     [self endRefresh:noMoreData];
+    
+    ///如果成功 是否需要出触发takes
+    if (success) {
+        ///计数需要等到 refresh 结束
+        [self trigger_takes];
+    }
     
     [self setBackGroundViewWithNetwork:success isEmpty:isEmpty];
     
@@ -112,20 +112,17 @@
 
     if (self.latest_refresh & eRBTV_DirHeader) {
         if (self.headerTakes) {
-            self.refreshHeaderEnable = [self.headerTakes do_take];
+            self.rb_header.enable = [self.headerTakes do_take];
         }
 
         if (self.footerTakes && self.footerTakes.resetAble) {
-            ///是否需要重置计数器
-            [self.footerTakes reset];
-            if (self.footerTakes.continueTake) {
-                self.refreshFooterEnable = YES;
-            }
+            ///是否需要重置 尾部计数器
+            self.rb_footer.enable = [self.footerTakes reset];
         }
     }
     else if (self.latest_refresh & eRBTV_DirFooter) {
         if (!self.footerTakes) { return; }
-        self.refreshFooterEnable = [self.footerTakes do_take];
+        self.rb_footer.enable = [self.footerTakes do_take];
     }
     
 }
@@ -146,25 +143,24 @@
 }
 
 - (void)footer_end_refresh:(BOOL)displayNoMoreData {
-    if (self.refreshFooterEnable) {
+    if (self.rb_footer.enable) {
         if (displayNoMoreData) {
-            [self.mj_footer  endRefreshingWithNoMoreData];
+            [self.rb_footer.refresh  endRefreshingWithNoMoreData];
             return;
         }
-        [self.mj_footer endRefreshing];
+        [self.rb_footer.refresh endRefreshing];
     }
 }
 
 - (void)header_end_refresh {
-    if (self.mj_header) {
-        [self.mj_header endRefreshing];
+    if (self.rb_header.enable) {
+        [self.rb_header.refresh endRefreshing];
     }
 }
 
 - (void)rb_mj_refresh:(refresh)refresh enableHeader:(BOOL)header footer:(BOOL)footer {
     _refresh = refresh;
-    _refreshHeaderEnable = header;
-    _refreshFooterEnable = footer;
+    [self allAvailableHeader:header :footer];
     [self setupMJRefresh];
 }
 
@@ -179,8 +175,8 @@
 
 - (RBTableView *(^)(eRBTV_Dir))enable {
     return ^RBTableView *(eRBTV_Dir dir) {
-        self.refreshHeaderEnable = dir & eRBTV_DirHeader;
-        self.refreshFooterEnable = dir & eRBTV_DirFooter;
+        self.rb_header.enable = dir & eRBTV_DirHeader;
+        self.rb_footer.enable = dir & eRBTV_DirFooter;
         
         return self;
     };
@@ -188,25 +184,22 @@
 
 - (void)setupMJRefresh {
     
-    
     if (UITableViewStylePlain == self.style) {
         self.tableFooterView = [UIView new];
     }
-    
-    
-    @weakify(self)
-    if (!self.mj_header && _refreshHeaderEnable) {
-        self.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            @strongify(self)
-            
-            if (self.mj_footer && (self.mj_footer.state == MJRefreshStateRefreshing)) {
-                return;
-            }
-            [self trigger_refresh:eRBTV_DirHeader];
-        }];
+    if (!self.mj_header) {
+        self.mj_header = self.rb_header.refresh;
     }
-    if (!self.mj_footer && _refreshFooterEnable) {
-        self.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    if (!self.mj_footer) {
+        self.mj_footer = self.rb_footer.refresh;
+    }
+}
+
+- (RB_Refresh<MJRefreshBackNormalFooter *> *)rb_footer {
+    if (!_rb_footer) {
+        @weakify(self)
+            
+        _rb_footer = [RB_Refresh<MJRefreshBackNormalFooter *> refresh:[MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             @strongify(self)
             
             if (self.mj_header && (self.mj_header.state == MJRefreshStateRefreshing)) {
@@ -218,10 +211,45 @@
                 return;
             }
             [self trigger_refresh:eRBTV_DirFooter];
+        }] delay:^(MJRefreshBackNormalFooter *refresh) {
+            if (refresh) {
+                [refresh beginRefreshing];
+            }
+        } disable:^(BOOL disable, MJRefreshBackNormalFooter *refresh) {
+            @strongify(self)
+            self.mj_footer.hidden = disable;
         }];
     }
+    return _rb_footer;
 }
 
+- (RB_Refresh<MJRefreshNormalHeader *> *)rb_header {
+    if (!_rb_header) {
+        @weakify(self)
+        
+        MJRefreshNormalHeader *h = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            @strongify(self)
+            if (self.mj_footer && (self.mj_footer.state == MJRefreshStateRefreshing)) {
+                return;
+            }
+            [self trigger_refresh:eRBTV_DirHeader];
+        }];
+        h.endRefreshingCompletionBlock = ^{
+            
+        };
+        
+        _rb_header = [RB_Refresh<MJRefreshNormalHeader *> refresh:h delay:^(MJRefreshNormalHeader *refresh) {
+            if (refresh) {
+                [refresh beginRefreshing];
+            }
+        } disable:^(BOOL disable, MJRefreshNormalHeader *refresh) {
+            @strongify(self)
+            self.mj_header.hidden = disable;
+        }];
+        
+    }
+    return _rb_header;
+}
 
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
@@ -240,16 +268,6 @@
         _refreshIndex = 0;
     }
     return _refreshIndex;
-}
-
-- (void)setRefreshHeaderEnable:(BOOL)refreshHeaderEnable {
-    _refreshHeaderEnable = refreshHeaderEnable;
-    self.mj_header = _refreshHeaderEnable ? self.mj_header : nil;
-}
-
-- (void)setRefreshFooterEnable:(BOOL)refreshFooterEnable {
-    _refreshFooterEnable = refreshFooterEnable;
-    self.mj_footer = _refreshFooterEnable ? self.mj_footer : nil;
 }
 
 - (void)setRefresh:(refresh)refresh {}
@@ -336,7 +354,19 @@
 - (__kindof RBTableView *(^)(NSInteger, eRBTV_Dir))take {
     return ^RBTableView *(NSInteger times, eRBTV_Dir dir) {
         
-        FreshTakes *take = [FreshTakes take:times];
+        ///头部 不允许重置
+        self.takeWithReset(times, dir & eRBTV_DirHeader ? NO : YES, dir);
+
+        return self;
+        
+    };
+}
+
+- (__kindof RBTableView *(^)(NSInteger, BOOL, eRBTV_Dir))takeWithReset {
+    
+    return ^RBTableView *(NSInteger times, BOOL reset, eRBTV_Dir dir) {
+        
+        FreshTakes *take = [FreshTakes take:times resetAble:reset];
         
         if (dir & eRBTV_DirHeader) {
             self.headerTakes = take;
@@ -344,30 +374,12 @@
         if (dir & eRBTV_DirFooter) {
             self.footerTakes = take;
         }
-
+        
         return self;
         
     };
+ 
 }
-
-//- (__kindof RBTableView *(^)(NSInteger, BOOL, eRBTV_Dir))takeWithReset {
-//    
-//    return ^RBTableView *(NSInteger times, BOOL reset, eRBTV_Dir dir) {
-//        
-//        FreshTakes *take = [FreshTakes take:times resetAble:reset];
-//        
-//        if (dir & eRBTV_DirHeader) {
-//            self.headerTakes = take;
-//        }
-//        if (dir & eRBTV_DirFooter) {
-//            self.footerTakes = take;
-//        }
-//        
-//        return self;
-//        
-//    };
-// 
-//}
 
 @end
 

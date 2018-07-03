@@ -35,16 +35,16 @@
         if (header) {
             [self.array removeAllObjects];
         }
-        
+
         [self.array addObjectsFromArray:@[@1, @2, @3, @4, @5]];
-        
+
         NSLog(@"开始刷新 %ld --- %@", page, header ? @"首页" : @"非首页");
-     
+
         [tableView endRefreshAndRequestSuccess:YES withNoMoreData:NO isEmpty:NO];
-        
-    }].enable(eRBTV_DirFooter | eRBTV_DirHeader).take(eRBTV_DirHeader, 1);
-    
-    
+
+    }].enable(eRBTV_DirFooter | eRBTV_DirHeader).takeWithReset(eRBTV_DirFooter, NO, 2);
+
+
     [self.tableView startRefresh];
     
 }
