@@ -10,6 +10,8 @@
 
 #import <RBToolKit/RBTableView.h>
 
+#import <ReactiveObjC/ReactiveObjC.h>
+
 @interface RBTableViewExampleVC ()<UITableViewDataSource>
 
 /**  */
@@ -27,8 +29,9 @@
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:[UITableViewCell description]];
     
+    @weakify(self)
     [self.tableView rb_mj_refresh:^(BOOL header, NSInteger page, RBTableView *tableView) {
-     
+     @strongify(self)
         if (header) {
             [self.array removeAllObjects];
         }
@@ -39,7 +42,7 @@
      
         [tableView endRefreshAndRequestSuccess:YES withNoMoreData:NO isEmpty:NO];
         
-    }].enable(eRBTV_DirHeader | eRBTV_DirFooter).take(eRBTV_DirFooter, 2);
+    }].enable(eRBTV_DirFooter | eRBTV_DirHeader).take(eRBTV_DirHeader, 1);
     
     
     [self.tableView startRefresh];

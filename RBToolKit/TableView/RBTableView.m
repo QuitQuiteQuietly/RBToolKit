@@ -10,9 +10,15 @@
 #import "MJRefresh.h"
 #import "ReactiveObjC.h"
 
+#import "RBTableViewConfig.h"
+
 @interface RBTableView ()
 
 @property (nonatomic, readwrite, assign)NSInteger refreshIndex;
+
+/**  */
+//@property (nonatomic, strong)MJRefreshNormalHeader *rb_header;
+//@property (nonatomic, strong)MJRefreshFooter *footer;
 
 /**  */
 @property (nonatomic, readwrite, strong)UIImageView *noMoreDataView;
@@ -24,8 +30,8 @@
 @property (nonatomic, readwrite, assign)BOOL refreshFooterEnable;
 
 /** 响应几次 */
-@property (nonatomic, strong)RACTwoTuple <NSNumber *, NSNumber *>*headerTakes;
-@property (nonatomic, strong)RACTwoTuple <NSNumber *, NSNumber *>*footerTakes;
+@property (nonatomic, strong)FreshTakes *headerTakes;
+@property (nonatomic, strong)FreshTakes *footerTakes;
 /** 最近一次的刷新 是什么位置 */
 @property (nonatomic, assign)eRBTV_Dir latest_refresh;
 
@@ -105,35 +111,25 @@
 - (void)trigger_takes {
 
     if (self.latest_refresh & eRBTV_DirHeader) {
-        if (!self.headerTakes) { return; }
-        RACTupleUnpack(NSNumber *con, RACTwoTuple *info) = [self continueTakes:self.headerTakes];
-        self.refreshHeaderEnable = con.boolValue;
-        self.headerTakes = info;
+        if (self.headerTakes) {
+            self.refreshHeaderEnable = [self.headerTakes do_take];
+        }
+
+        if (self.footerTakes && self.footerTakes.resetAble) {
+            ///是否需要重置计数器
+            [self.footerTakes reset];
+            if (self.footerTakes.continueTake) {
+                self.refreshFooterEnable = YES;
+            }
+        }
     }
     else if (self.latest_refresh & eRBTV_DirFooter) {
         if (!self.footerTakes) { return; }
-        RACTupleUnpack(NSNumber *con, RACTwoTuple *info) = [self continueTakes:self.footerTakes];
-        self.refreshFooterEnable = con.boolValue;
-        self.footerTakes = info;
+        self.refreshFooterEnable = [self.footerTakes do_take];
     }
     
 }
 
-- (RACTwoTuple <NSNumber *, RACTwoTuple *>*)continueTakes:(RACTwoTuple <NSNumber *, NSNumber *> *)package {
-    BOOL take = package.first.boolValue;
-    
-    NSInteger times = package.second.integerValue;
-    times --;
-    
-    BOOL continueTakes = take && times > 0;
-    if (!continueTakes) {
-        package = nil;
-    }
-    else {
-        package = [RACTwoTuple tupleWithObjectsFromArray:@[@(take), @(times)]];
-    }
-    return [RACTwoTuple tupleWithObjectsFromArray:@[@(continueTakes), package] convertNullsToNils:YES];
-}
 
 - (void)setBackGroundViewWithNetwork:(BOOL)success isEmpty:(BOOL)isEmpty {
     if (!success && self.networkWrongView) {
@@ -150,7 +146,7 @@
 }
 
 - (void)footer_end_refresh:(BOOL)displayNoMoreData {
-    if (self.mj_footer) {
+    if (self.refreshFooterEnable) {
         if (displayNoMoreData) {
             [self.mj_footer  endRefreshingWithNoMoreData];
             return;
@@ -183,13 +179,8 @@
 
 - (RBTableView *(^)(eRBTV_Dir))enable {
     return ^RBTableView *(eRBTV_Dir dir) {
-      
-        if (dir & eRBTV_DirHeader) {
-            self.refreshHeaderEnable = YES;
-        }
-        if (dir & eRBTV_DirFooter) {
-            self.refreshFooterEnable = YES;
-        }
+        self.refreshHeaderEnable = dir & eRBTV_DirHeader;
+        self.refreshFooterEnable = dir & eRBTV_DirFooter;
         
         return self;
     };
@@ -231,6 +222,7 @@
     }
 }
 
+
 - (void)didMoveToSuperview {
     [super didMoveToSuperview];
     if (self.superview == nil) {
@@ -259,7 +251,6 @@
     _refreshFooterEnable = refreshFooterEnable;
     self.mj_footer = _refreshFooterEnable ? self.mj_footer : nil;
 }
-
 
 - (void)setRefresh:(refresh)refresh {}
 
@@ -333,24 +324,56 @@
     return imageView;
 }
 
+- (void)dealloc {
+    NSLog(@"tableView %@", self);
+}
+
 @end
 
 
 @implementation RBTableView (Takes)
 
-- (RBTableView *(^)(NSInteger, eRBTV_Dir))take {
+- (__kindof RBTableView *(^)(NSInteger, eRBTV_Dir))take {
     return ^RBTableView *(NSInteger times, eRBTV_Dir dir) {
         
+        FreshTakes *take = [FreshTakes take:times];
+        
         if (dir & eRBTV_DirHeader) {
-            self.headerTakes = [RACTwoTuple tupleWithObjectsFromArray:@[@(YES), @(times)]];
+            self.headerTakes = take;
         }
         if (dir & eRBTV_DirFooter) {
-            self.footerTakes = [RACTwoTuple tupleWithObjectsFromArray:@[@(YES), @(times)]];
+            self.footerTakes = take;
         }
-      
+
         return self;
         
     };
 }
 
+//- (__kindof RBTableView *(^)(NSInteger, BOOL, eRBTV_Dir))takeWithReset {
+//    
+//    return ^RBTableView *(NSInteger times, BOOL reset, eRBTV_Dir dir) {
+//        
+//        FreshTakes *take = [FreshTakes take:times resetAble:reset];
+//        
+//        if (dir & eRBTV_DirHeader) {
+//            self.headerTakes = take;
+//        }
+//        if (dir & eRBTV_DirFooter) {
+//            self.footerTakes = take;
+//        }
+//        
+//        return self;
+//        
+//    };
+// 
+//}
+
 @end
+
+
+
+
+
+
+
