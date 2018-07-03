@@ -351,28 +351,31 @@
 
 @implementation RBTableView (Takes)
 
-- (__kindof RBTableView *(^)(NSInteger, eRBTV_Dir))take {
-    return ^RBTableView *(NSInteger times, eRBTV_Dir dir) {
+- (__kindof RBTableView *(^)(eRBTV_Dir, NSInteger))take {
+    return ^RBTableView *(eRBTV_Dir dir, NSInteger times) {
         
         ///头部 不允许重置
-        self.takeWithReset(times, dir & eRBTV_DirHeader ? NO : YES, dir);
+        if (dir & eRBTV_DirHeader) {
+            self.takeWithReset(eRBTV_DirHeader, times, NO);
+        }
+        if (dir & eRBTV_DirFooter) {
+            self.takeWithReset(eRBTV_DirFooter, times, YES);
+        }
 
         return self;
         
     };
 }
 
-- (__kindof RBTableView *(^)(NSInteger, BOOL, eRBTV_Dir))takeWithReset {
+- (__kindof RBTableView *(^)(eRBTV_Dir, NSInteger, BOOL))takeWithReset {
     
-    return ^RBTableView *(NSInteger times, BOOL reset, eRBTV_Dir dir) {
-        
-        FreshTakes *take = [FreshTakes take:times resetAble:reset];
+    return ^RBTableView *(eRBTV_Dir dir, NSInteger times, BOOL reset) {
         
         if (dir & eRBTV_DirHeader) {
-            self.headerTakes = take;
+            self.headerTakes = [FreshTakes take:times resetAble:reset];
         }
         if (dir & eRBTV_DirFooter) {
-            self.footerTakes = take;
+            self.footerTakes = [FreshTakes take:times resetAble:reset];
         }
         
         return self;

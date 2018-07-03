@@ -42,7 +42,7 @@
 
         [tableView endRefreshAndRequestSuccess:YES withNoMoreData:NO isEmpty:NO];
 
-    }].enable(eRBTV_DirFooter | eRBTV_DirHeader).takeWithReset(eRBTV_DirFooter, NO, 2);
+    }].enable(eRBTV_DirFooter | eRBTV_DirHeader).takeWithReset(eRBTV_DirHeader, 2, NO);
 
 
     [self.tableView startRefresh];

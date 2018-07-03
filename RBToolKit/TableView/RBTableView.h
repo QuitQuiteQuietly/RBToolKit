@@ -99,8 +99,8 @@ typedef void(^refresh)(BOOL header, NSInteger page, RBTableView *tableView);
 
 @interface RBTableView (Takes)
 
-- (__kindof RBTableView *(^)(NSInteger times, eRBTV_Dir direction))take;
+- (__kindof RBTableView *(^)(eRBTV_Dir direction, NSInteger times))take;
 
-- (__kindof RBTableView *(^)(NSInteger times, BOOL resetAble, eRBTV_Dir direction))takeWithReset;
+- (__kindof RBTableView *(^)(eRBTV_Dir direction, NSInteger times, BOOL resetAble))takeWithReset;
 
 @end
