@@ -38,7 +38,7 @@
 
         [self.array addObjectsFromArray:@[@1, @2, @3, @4, @5]];
 
-        NSLog(@"开始刷新 %ld --- %@", page, header ? @"首页" : @"非首页");
+        NSLog(@"开始刷新 %ld --- %@", (long)page, header ? @"首页" : @"非首页");
 
         [tableView endRefreshAndRequestSuccess:YES withNoMoreData:NO isEmpty:NO];
 
@@ -64,7 +64,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:[UITableViewCell description]];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
     cell.detailTextLabel.text = self.array[indexPath.row];
     
     return cell;

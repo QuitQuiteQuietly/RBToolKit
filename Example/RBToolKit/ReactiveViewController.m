@@ -285,7 +285,7 @@
     
     [ccc subscribeNext:^(RACTuple *_Nullable x) {
         
-        NSLog(@"%@-%ld", x, x.count);
+        NSLog(@"%@-%u", x, x.count);
     } error:^(NSError * _Nullable error) {
         NSLog(@"%@", error);
     }];

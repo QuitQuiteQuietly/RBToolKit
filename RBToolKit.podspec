@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RBToolKit'
-  s.version          = '0.2.2'
+  s.version          = '0.2.3'
   s.summary          = 'RBToolKit.'
 
   s.description      = <<-DESC
@@ -27,7 +27,7 @@ TODO: Add long description of the pod here.
     end
 
     s.subspec 'TableView' do |tableView|
-        tableView.source_files = 'RBToolKit/TableView/RBTableView.{h,m}'
+        tableView.source_files = 'RBToolKit/TableView/*.{h,m}'
         tableView.dependency 'MJRefresh'
         tableView.dependency 'ReactiveObjC'
     end

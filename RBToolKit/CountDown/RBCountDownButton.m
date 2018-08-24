@@ -90,7 +90,7 @@
 }
 
 - (NSString *)titleDisplayCurrently {
-    return [NSString stringWithFormat:@"%ld后重新发送", self.remainSeconds];
+    return [NSString stringWithFormat:@"%ld后重新发送", (long)self.remainSeconds];
 }
 
 - (void)sendSms { }
