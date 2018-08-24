@@ -53,6 +53,17 @@ typedef void(^refresh)(BOOL header, NSInteger page, RBTableView *tableView);
                             isEmpty:(BOOL)isEmpty;
 
 
+
+/**
+ 重载背景图片
+
+ @param success 网络是否成功
+ @param isEmpty 数据源是否为空
+ */
+- (void)setBackGroundViewWithNetwork:(BOOL)success
+                             isEmpty:(BOOL)isEmpty;
+
+
 /**
  结束刷新
 
