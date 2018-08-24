@@ -246,7 +246,7 @@
             @strongify(self)
             self.mj_header.hidden = disable;
         }];
-        
+
     }
     return _rb_header;
 }

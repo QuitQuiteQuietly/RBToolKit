@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                    <title>BCBPay Test</title>
+                    </head>
+    
+    <body>
+        <div class="send"></div>
+        
+        <button onclick="BCBPay('coldwallet.bcbchain.io/api/v1/fomo/transfer', 'timestamp=123456')">支付基本流程</button>
+        
+        <button onclick="listReq()">获取钱包信息</button>
+        
+        <button onclick="callWallet()">唤醒BCB Wallet</button>
+<!--        <a href="bcbwallet://">唤醒BCB Wallet</a>-->
+
+        <p id="inform">支付结果</p>
+    
+        <ol id="list">
+        </ol>
+        
+        <div class="result"></div>
+        <script>
+            function callWallet() {
+                final('bcbwallet://')
+            }
+            function final(url) {
+                document.location = url;
+                
+                window.webkit.messageHandlers.BCBPay.postMessage(url)
+            }
+        
+        
+            function BCBPay(action, params) {
+                final(`bcbwallet://https://${action}?${params}`)
+            }
+                      
+            function listReq() {
+                final(`bcbinforeq://anythingElse?`)
+            }
+              
+            function inform(data) {
+                var p = document.getElementById('inform')
+                p.innerHTML = data['txHash'];
+            }
+        
+        
+        function listWallets(wallets) {
+            
+            var list = document.getElementById('list')
+            
+            for (var wallet = 0, i = wallets.length; wallet < i; wallet++) {
+                
+                var node=document.createElement("LI");
+                
+                var textnode=document.createTextNode(wallets[wallet]);
+                
+                node.appendChild(textnode);
+                
+                list.appendChild(node);
+                
+            }
+        }
+        
+            </script>
+    </body>
+    
+</html>

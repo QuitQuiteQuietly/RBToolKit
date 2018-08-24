@@ -23,9 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    _qr_imageView.image = [RB_QRGenerate qr_info:@"itms-services://?action=download-manifest&url=https://www.bcbchain.io/app/ios/manifest.plist" width:CGRectGetWidth(_qr_imageView.frame)];
-    
+    _qr_imageView.image = [RB_QRGenerate qr_info:@"bcbwallet://req_web=https://www.cgs.cool/discovery?name=ttttuyg" width:CGRectGetWidth(_qr_imageView.frame)];
+    ///itms-services://?action=download-manifest&url=https://www.bcbchain.io/app/ios/manifest.plist
     UIBarButtonItem *item = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"扫一扫"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
 
     self.navigationItem.rightBarButtonItem = item;

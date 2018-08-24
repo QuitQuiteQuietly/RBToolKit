@@ -26,13 +26,19 @@
 		710C91C720C7CA3000364A50 /* CardNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C620C7CA3000364A50 /* CardNaviViewController.m */; };
 		710C91CE20C7D24900364A50 /* AnimatorShowImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91C920C7D24800364A50 /* AnimatorShowImage.m */; };
 		710C91CF20C7D24900364A50 /* AnimatorShowDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */; };
+		711544B12119736E009845E3 /* H5_DisplayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 711544B02119736E009845E3 /* H5_DisplayVC.m */; };
+		711544B3211973EA009845E3 /* test-BCBPay-ios5.html in Resources */ = {isa = PBXBuildFile; fileRef = 711544B2211973E9009845E3 /* test-BCBPay-ios5.html */; };
 		7143E29420D0FA0E00E950F2 /* RBTableViewExampleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7143E29320D0FA0E00E950F2 /* RBTableViewExampleVC.m */; };
 		71458F1C20E3D9130039072F /* RBText.m in Sources */ = {isa = PBXBuildFile; fileRef = 71458F1B20E3D9130039072F /* RBText.m */; };
+		716CEB5820FCACCD000B341D /* RBLayerTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 716CEB5720FCACCD000B341D /* RBLayerTestViewController.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54D020BED4BE00E4E815 /* ReactiveViewController.m */; };
 		717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DC20BFD9E300E4E815 /* BaseViewController.m */; };
 		717A54E020BFDA0800E4E815 /* QRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54DF20BFDA0800E4E815 /* QRViewController.m */; };
 		717A550020C1591600E4E815 /* QRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 717A54FF20C1591600E4E815 /* QRScanViewController.m */; };
+		7184DEC820ECD0A20055E41A /* RBExmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7184DEC720ECD0A20055E41A /* RBExmViewController.m */; };
+		7184DECB20ECD2410055E41A /* RBtextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7184DECA20ECD2410055E41A /* RBtextView.m */; };
+		7184DECD20ECE3140055E41A /* RBtextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7184DECC20ECE3140055E41A /* RBtextView.xib */; };
 		7189242220A9714100D1AF03 /* RBLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7189242120A9714100D1AF03 /* RBLockViewController.m */; };
 		71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
@@ -83,6 +89,9 @@
 		710C91CB20C7D24800364A50 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		710C91CC20C7D24800364A50 /* AnimatorShowImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatorShowImage.h; sourceTree = "<group>"; };
 		710C91CD20C7D24800364A50 /* AnimatorShowDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatorShowDetail.h; sourceTree = "<group>"; };
+		711544AF2119736E009845E3 /* H5_DisplayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = H5_DisplayVC.h; sourceTree = "<group>"; };
+		711544B02119736E009845E3 /* H5_DisplayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = H5_DisplayVC.m; sourceTree = "<group>"; };
+		711544B2211973E9009845E3 /* test-BCBPay-ios5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test-BCBPay-ios5.html"; sourceTree = "<group>"; };
 		71189FEC20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		71189FED20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		71189FEE20919D7E00C1A94B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -90,6 +99,8 @@
 		7143E29320D0FA0E00E950F2 /* RBTableViewExampleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBTableViewExampleVC.m; sourceTree = "<group>"; };
 		71458F1A20E3D9130039072F /* RBText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBText.h; sourceTree = "<group>"; };
 		71458F1B20E3D9130039072F /* RBText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBText.m; sourceTree = "<group>"; };
+		716CEB5620FCACCD000B341D /* RBLayerTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBLayerTestViewController.h; sourceTree = "<group>"; };
+		716CEB5720FCACCD000B341D /* RBLayerTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBLayerTestViewController.m; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		717A54CF20BED4BE00E4E815 /* ReactiveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactiveViewController.h; sourceTree = "<group>"; };
 		717A54D020BED4BE00E4E815 /* ReactiveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveViewController.m; sourceTree = "<group>"; };
@@ -99,6 +110,11 @@
 		717A54DF20BFDA0800E4E815 /* QRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRViewController.m; sourceTree = "<group>"; };
 		717A54FE20C1591600E4E815 /* QRScanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QRScanViewController.h; sourceTree = "<group>"; };
 		717A54FF20C1591600E4E815 /* QRScanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QRScanViewController.m; sourceTree = "<group>"; };
+		7184DEC620ECD0A20055E41A /* RBExmViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBExmViewController.h; sourceTree = "<group>"; };
+		7184DEC720ECD0A20055E41A /* RBExmViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBExmViewController.m; sourceTree = "<group>"; };
+		7184DEC920ECD2410055E41A /* RBtextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBtextView.h; sourceTree = "<group>"; };
+		7184DECA20ECD2410055E41A /* RBtextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBtextView.m; sourceTree = "<group>"; };
+		7184DECC20ECE3140055E41A /* RBtextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RBtextView.xib; sourceTree = "<group>"; };
 		7189242020A9714100D1AF03 /* RBLockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBLockViewController.h; sourceTree = "<group>"; };
 		7189242120A9714100D1AF03 /* RBLockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RBLockViewController.m; sourceTree = "<group>"; };
 		71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransitionButtonViewController.h; sourceTree = "<group>"; };
@@ -175,12 +191,15 @@
 		6003F593195388D20070C39A /* Example for RBToolKit */ = {
 			isa = PBXGroup;
 			children = (
+				711544AE21197285009845E3 /* WebView */,
 				7143E29120D0F9EA00E950F2 /* TableView_Example */,
 				710C91BE20C7C2FB00364A50 /* CardTransVC */,
 				717A54E120BFDA0B00E4E815 /* QR */,
 				6003F59C195388D20070C39A /* RBAppDelegate.h */,
 				6003F59D195388D20070C39A /* RBAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				716CEB5620FCACCD000B341D /* RBLayerTestViewController.h */,
+				716CEB5720FCACCD000B341D /* RBLayerTestViewController.m */,
 				71BBE6A320B7D439002B9581 /* TransitionButtonViewController.h */,
 				71BBE6A420B7D439002B9581 /* TransitionButtonViewController.m */,
 				717A54CF20BED4BE00E4E815 /* ReactiveViewController.h */,
@@ -196,6 +215,11 @@
 				6003F594195388D20070C39A /* Supporting Files */,
 				71458F1A20E3D9130039072F /* RBText.h */,
 				71458F1B20E3D9130039072F /* RBText.m */,
+				7184DEC620ECD0A20055E41A /* RBExmViewController.h */,
+				7184DEC720ECD0A20055E41A /* RBExmViewController.m */,
+				7184DEC920ECD2410055E41A /* RBtextView.h */,
+				7184DECA20ECD2410055E41A /* RBtextView.m */,
+				7184DECC20ECE3140055E41A /* RBtextView.xib */,
 			);
 			name = "Example for RBToolKit";
 			path = RBToolKit;
@@ -265,6 +289,16 @@
 				710C91CA20C7D24800364A50 /* AnimatorShowDetail.m */,
 			);
 			path = Transition;
+			sourceTree = "<group>";
+		};
+		711544AE21197285009845E3 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				711544AF2119736E009845E3 /* H5_DisplayVC.h */,
+				711544B02119736E009845E3 /* H5_DisplayVC.m */,
+				711544B2211973E9009845E3 /* test-BCBPay-ios5.html */,
+			);
+			name = WebView;
 			sourceTree = "<group>";
 		};
 		7143E29120D0F9EA00E950F2 /* TableView_Example */ = {
@@ -384,9 +418,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				711544B3211973EA009845E3 /* test-BCBPay-ios5.html in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				7184DECD20ECE3140055E41A /* RBtextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,12 +499,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RBToolKit_Example/Pods-RBToolKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/RBToolKit/RBToolKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RBToolKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 			);
@@ -488,13 +526,17 @@
 				7143E29420D0FA0E00E950F2 /* RBTableViewExampleVC.m in Sources */,
 				710C91C420C7C33000364A50 /* CardInfo_ViewController.m in Sources */,
 				71BBE6A520B7D43A002B9581 /* TransitionButtonViewController.m in Sources */,
+				7184DEC820ECD0A20055E41A /* RBExmViewController.m in Sources */,
 				717A550020C1591600E4E815 /* QRScanViewController.m in Sources */,
 				710C91CE20C7D24900364A50 /* AnimatorShowImage.m in Sources */,
 				6003F59E195388D20070C39A /* RBAppDelegate.m in Sources */,
+				711544B12119736E009845E3 /* H5_DisplayVC.m in Sources */,
 				6003F5A7195388D20070C39A /* RBViewController.m in Sources */,
+				7184DECB20ECD2410055E41A /* RBtextView.m in Sources */,
 				717A54D120BED4BE00E4E815 /* ReactiveViewController.m in Sources */,
 				710C91C120C7C31900364A50 /* Card_ViewController.m in Sources */,
 				717A54DD20BFD9E300E4E815 /* BaseViewController.m in Sources */,
+				716CEB5820FCACCD000B341D /* RBLayerTestViewController.m in Sources */,
 				710C91CF20C7D24900364A50 /* AnimatorShowDetail.m in Sources */,
 				71458F1C20E3D9130039072F /* RBText.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

@@ -25,8 +25,8 @@
 @property (nonatomic, weak)RBFileManager *f;
 
 /**  */
-@property (nonatomic, weak)RACSignal *s;
-@property (nonatomic, weak)RACSignal *sS;
+@property (nonatomic, strong)RACSignal *s;
+@property (nonatomic, strong)RACSignal *sS;
 
 
 @end
@@ -57,22 +57,19 @@
         [subscriber sendNext:@1];
         //        [subscriber sendError:nil];
         [subscriber sendCompleted];
+//        return nil;
         return [RACDisposable disposableWithBlock:^{
             NSLog(@"第1个信号disposable");
         }];
     }];
     
+    self.s = s;
+    
     [s.rac_willDeallocSignal subscribeCompleted:^{
         NSLog(@"s dealloc");
     }];
     
-    [s subscribeNext:^(id  _Nullable x) {
-        NSLog(@"%@", x);
-    } error:^(NSError * _Nullable error) {
-        NSLog(@"%@", error);
-    } completed:^{
-        NSLog(@"s completed");
-    }];
+
 //
 //    RACSubject *subject = [RACSubject subject]; //1
 //    [subject.rac_willDeallocSignal subscribeCompleted:^{ //2
@@ -92,6 +89,16 @@
             }];
         }];
     }];
+
+    
+    [s subscribeNext:^(id  _Nullable x) {
+        NSLog(@"%@", x);
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"%@", error);
+    } completed:^{
+        NSLog(@"s completed");
+    }];
+    
     
     [self.sS subscribeNext:^(id  _Nullable x) {
         NSLog(@"%@", x);
@@ -99,7 +106,10 @@
         NSLog(@"then completed");
     }];
     
-    self.s = s;
+    
+    NSLog(@"%@", s);
+    
+    
 
     NSLog(@"%@", self.s);
     

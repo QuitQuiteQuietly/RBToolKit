@@ -2,7 +2,7 @@ use_frameworks!
 
 target 'RBToolKit_Example' do
   pod 'RBToolKit', :path => '../'
-
+pod 'Masonry'
   target 'RBToolKit_Tests' do
     inherit! :search_paths
 

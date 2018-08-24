@@ -20,6 +20,9 @@
 /**  */
 @property (nonatomic, strong)RACSignal *gg;
 
+/**  */
+@property (nonatomic, strong)RACSignal *holder;
+
 @end
 
 @implementation ReactiveViewController
@@ -27,7 +30,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self racMultiConnect];
+    self.holder = [[[RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        
+        return [RACDisposable disposableWithBlock:^{
+            ;
+        }];
+    }] takeUntil:self.rac_willDeallocSignal] repeat];
+    
+    [self.holder subscribeNext:^(id  _Nullable x) {
+        ;
+    }];
+    
+//    [self racMultiCast];
+//    [self racMultiConnect];
 //    [self sequence];
     
 //    [self racCommand];
@@ -38,21 +53,29 @@
     
 //    [self racGroup];
     
-//    RACSignal *startWith = [[RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
-//        [subscriber sendNext:@"44"];
-//
-//        [subscriber sendNext:@"445"];
-//
-//        [subscriber sendNext:@"446"];
-//        [subscriber sendCompleted];
-//        return nil;
-//    }] startWith:@4];
-//
-//
-//    [startWith subscribeNext:^(id  _Nullable x) {
-//        NSLog(@"%@", x);
-    //    }];
     
+    
+}
+- (void)dealloc {
+    NSLog(@"%@", self.holder);
+}
+
+- (void)racMultiCast {
+    
+    RACSignal *sourceSignal = [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        [subscriber sendNext:@1];
+        [subscriber sendCompleted];
+        return nil;
+    }];
+    RACMulticastConnection *connection = [sourceSignal multicast:[RACReplaySubject subject]];
+    [connection.signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@"product: %@", x);
+    }];
+    [connection connect];
+    [connection.signal subscribeNext:^(id  _Nullable x) {
+//        NSNumber *productId = [x objectForKey:@"id"];
+        NSLog(@"productId: %@", x);
+    }];
     
 }
 
