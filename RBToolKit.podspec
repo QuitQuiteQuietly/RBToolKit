@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RBToolKit'
-  s.version          = '0.2.3'
+  s.version          = '0.2.4'
   s.summary          = 'RBToolKit.'
 
   s.description      = <<-DESC
@@ -51,7 +51,7 @@ TODO: Add long description of the pod here.
     end
     
     s.subspec 'Wallet_Package' do |wp|
-        wp.source_files = 'RBToolKit/FileManager/**/*', 'RBToolKit/QRScan/**/*', 'RBToolKit/InterFace/**/*', 'RBToolKit/TransitionButton/*.{h,m}', 'RBToolKit/Time/**/*', 'RBToolKit/TableView/RBTableView.{h,m}'
+        wp.source_files = 'RBToolKit/FileManager/**/*', 'RBToolKit/QRScan/**/*', 'RBToolKit/InterFace/**/*', 'RBToolKit/TransitionButton/*.{h,m}', 'RBToolKit/Time/**/*', 'RBToolKit/TableView/*.{h,m}'
         wp.dependency 'MJRefresh'
         wp.dependency 'ReactiveObjC'
         end
